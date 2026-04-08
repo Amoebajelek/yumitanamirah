@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
@@ -65,84 +65,145 @@ function InstagramEmbed({ url }: { url: string }) {
   );
 }
 
-/* ── TikTok Embed using official embed.js ── */
-function TikTokEmbed({ url }: { url: string }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    // Load TikTok embed script if not already loaded
-    const existingScript = document.querySelector('script[src="https://www.tiktok.com/embed.js"]');
-
-    if (!existingScript) {
-      const script = document.createElement("script");
-      script.src = "https://www.tiktok.com/embed.js";
-      script.async = true;
-      script.onload = () => setLoaded(true);
-      document.body.appendChild(script);
-    } else {
-      setLoaded(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Re-process embeds when loaded or URL changes
-    if (loaded && (window as unknown as Record<string, unknown>).tiktokEmbed) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).tiktokEmbed.lib.render(
-        containerRef.current?.querySelectorAll(".tiktok-embed")
-      );
-    }
-  }, [loaded, url]);
-
+/* ── TikTok Card (same style as IG embed) ── */
+function TikTokCard({ url, index }: { url: string; index: number }) {
   return (
-    <div
-      ref={containerRef}
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
       style={{
+        display: "block",
+        position: "relative",
+        aspectRatio: "9/16",
         borderRadius: "16px",
         overflow: "hidden",
+        textDecoration: "none",
+        background: "var(--bg-card)",
         border: "1px solid var(--border)",
         boxShadow: "var(--shadow-card)",
-        background: "var(--bg-card2)",
-        minHeight: "500px",
+        transition: "all 0.3s ease",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = "var(--primary)";
+        e.currentTarget.style.boxShadow = "var(--shadow-glow)";
+        e.currentTarget.style.transform = "translateY(-4px)";
+        const btn = e.currentTarget.querySelector("[data-play]") as HTMLElement;
+        if (btn) btn.style.background = "var(--primary)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "var(--border)";
+        e.currentTarget.style.boxShadow = "var(--shadow-card)";
+        e.currentTarget.style.transform = "translateY(0)";
+        const btn = e.currentTarget.querySelector("[data-play]") as HTMLElement;
+        if (btn) btn.style.background = "rgba(0,0,0,0.6)";
       }}
     >
-      <blockquote
-        className="tiktok-embed"
-        cite={url}
-        data-video-id=""
+      {/* Background pattern */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        background: "linear-gradient(160deg, var(--bg-card2) 0%, var(--bg-card) 50%, var(--bg-card2) 100%)",
+      }} />
+      <div style={{
+        position: "absolute",
+        top: "20%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "250px",
+        height: "250px",
+        borderRadius: "50%",
+        background: "radial-gradient(circle, var(--border) 0%, transparent 70%)",
+        pointerEvents: "none",
+      }} />
+
+      {/* TikTok logo + text */}
+      <div style={{
+        position: "absolute",
+        top: "16px",
+        left: "16px",
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        zIndex: 2,
+      }}>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--primary)">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.86a8.18 8.18 0 004.77 1.52V6.95a4.84 4.84 0 01-1-.26z" />
+        </svg>
+        <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)", fontWeight: 500 }}>TikTok</span>
+      </div>
+
+      {/* Center play button */}
+      <div
+        data-play=""
         style={{
-          maxWidth: "100%",
-          minWidth: "100%",
-          margin: 0,
-        }}
-      >
-        <section style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "64px",
+          height: "64px",
+          borderRadius: "50%",
+          background: "rgba(0,0,0,0.6)",
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          minHeight: "500px",
-          gap: "12px",
+          zIndex: 2,
+          transition: "background 0.3s ease",
+          backdropFilter: "blur(4px)",
+          border: "2px solid rgba(255,255,255,0.15)",
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+          <path d="M8 5.14v14l11-7-11-7z" />
+        </svg>
+      </div>
+
+      {/* Bottom info */}
+      <div style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        padding: "20px 16px 16px",
+        background: "linear-gradient(to top, var(--bg-card) 60%, transparent 100%)",
+        zIndex: 2,
+      }}>
+        <div style={{
+          fontSize: "0.8rem",
+          color: "var(--text)",
+          fontWeight: 500,
+          marginBottom: "6px",
         }}>
-          <svg viewBox="0 0 24 24" width="40" height="40" fill="var(--primary)" opacity={0.4}>
-            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.86a8.18 8.18 0 004.77 1.52V6.95a4.84 4.84 0 01-1-.26z" />
+          @namirah.yumita
+        </div>
+        <div style={{
+          fontSize: "0.7rem",
+          color: "var(--text-muted)",
+          marginBottom: "12px",
+        }}>
+          Video #{index + 1}
+        </div>
+        <div style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "6px",
+          fontSize: "0.65rem",
+          color: "var(--primary)",
+          background: "var(--bg-card2)",
+          border: "1px solid var(--border)",
+          padding: "5px 12px",
+          borderRadius: "6px",
+        }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+            <polyline points="15,3 21,3 21,9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
           </svg>
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              fontSize: "0.75rem",
-              color: "var(--text-muted)",
-              textDecoration: "none",
-            }}
-          >
-            Loading TikTok...
-          </a>
-        </section>
-      </blockquote>
-    </div>
+          Watch on TikTok
+        </div>
+      </div>
+    </a>
   );
 }
 
@@ -231,9 +292,7 @@ export default function Portfolio() {
         {/* Grid */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: currentPlatform === "instagram"
-            ? "repeat(auto-fill, minmax(280px, 1fr))"
-            : "repeat(auto-fill, minmax(320px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
           gap: "20px",
         }}>
           {visibleLinks.map((url, i) => (
@@ -246,7 +305,7 @@ export default function Portfolio() {
               {currentPlatform === "instagram" ? (
                 <InstagramEmbed url={url} />
               ) : (
-                <TikTokEmbed url={url} />
+                <TikTokCard url={url} index={i} />
               )}
             </motion.div>
           ))}
