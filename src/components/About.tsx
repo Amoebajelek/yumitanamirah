@@ -20,32 +20,38 @@ export default function About() {
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <p style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "var(--gold)", textTransform: "uppercase", marginBottom: "16px" }}>
+          <p style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "var(--primary)", textTransform: "uppercase", marginBottom: "16px", fontWeight: 500 }}>
             About
           </p>
           <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 600, lineHeight: 1.2, marginBottom: "32px" }}>
             Crafting stories that
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--rose)" }}>resonate & convert</em>
+            <em style={{
+              fontStyle: "italic",
+              background: "var(--gradient-3)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>resonate & convert</em>
           </h2>
           <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "32px" }}>
             <div className="section-line" />
           </div>
-          <p style={{ color: "var(--text-muted)", lineHeight: 1.9, fontSize: "0.95rem", marginBottom: "20px" }}>
+          <p style={{ color: "var(--text-secondary)", lineHeight: 1.9, fontSize: "0.95rem", marginBottom: "20px" }}>
             Saya adalah Yumita Namirah, Social Media Specialist dan Content Creator berbasis di Jakarta dengan passion mendalam di dunia digital storytelling. Dengan pengalaman sejak 2018, saya telah membangun karier yang menjembatani kreativitas dan strategi konten.
           </p>
-          <p style={{ color: "var(--text-muted)", lineHeight: 1.9, fontSize: "0.95rem", marginBottom: "32px" }}>
+          <p style={{ color: "var(--text-secondary)", lineHeight: 1.9, fontSize: "0.95rem", marginBottom: "32px" }}>
             Dari brand komersial hingga gerakan kepramukaan internasional — termasuk World Scout Jamboree di Korea Selatan — saya membawa perspektif unik dalam membangun brand voice yang autentik dan konten yang berdampak nyata.
           </p>
 
-          <div style={{ display: "flex", gap: "40px" }}>
+          <div style={{ display: "flex", gap: "40px", flexWrap: "wrap" }}>
             {[
-              { num: "7+", label: "Years Creating" },
-              { num: "2K+", label: "Contents Made" },
-              { num: "5+", label: "Brands Handled" },
+              { num: "7+", label: "Years Creating", color: "var(--primary)" },
+              { num: "2K+", label: "Contents Made", color: "var(--secondary)" },
+              { num: "5+", label: "Brands Handled", color: "var(--accent-teal)" },
             ].map((stat) => (
               <div key={stat.label}>
-                <div style={{ fontFamily: "Playfair Display, serif", fontSize: "2rem", color: "var(--gold)", fontWeight: 600 }}>{stat.num}</div>
+                <div style={{ fontFamily: "Playfair Display, serif", fontSize: "2rem", color: stat.color, fontWeight: 700 }}>{stat.num}</div>
                 <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "4px" }}>{stat.label}</div>
               </div>
             ))}
@@ -63,25 +69,29 @@ export default function About() {
             border: "1px solid var(--border)",
             padding: "40px",
             position: "relative",
+            borderRadius: "16px",
+            boxShadow: "var(--shadow-card)",
           }}>
-            {/* corner accent */}
+            {/* Corner gradient accent */}
             <div style={{
               position: "absolute",
               top: "-1px",
               right: "-1px",
-              width: "40px",
-              height: "40px",
-              borderTop: "2px solid var(--gold)",
-              borderRight: "2px solid var(--gold)",
+              width: "60px",
+              height: "60px",
+              borderTop: "2px solid var(--primary)",
+              borderRight: "2px solid var(--secondary)",
+              borderTopRightRadius: "16px",
             }} />
             <div style={{
               position: "absolute",
               bottom: "-1px",
               left: "-1px",
-              width: "40px",
-              height: "40px",
-              borderBottom: "2px solid var(--gold)",
-              borderLeft: "2px solid var(--gold)",
+              width: "60px",
+              height: "60px",
+              borderBottom: "2px solid var(--accent-teal)",
+              borderLeft: "2px solid var(--primary)",
+              borderBottomLeftRadius: "16px",
             }} />
 
             <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "24px" }}>
@@ -98,7 +108,7 @@ export default function About() {
             ].map((item, i) => (
               <div key={i} style={{
                 padding: "14px 0",
-                borderBottom: i < 5 ? "1px solid rgba(201,168,76,0.08)" : "none",
+                borderBottom: i < 5 ? "1px solid var(--border)" : "none",
                 display: "grid",
                 gridTemplateColumns: "110px 1fr",
                 gap: "16px",
