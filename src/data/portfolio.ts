@@ -91,28 +91,28 @@ export const portfolioLinks2024 = [
 ];
 
 export const tiktokLinks2023 = [
-  "https://vt.tiktok.com/ZSHmy8vj7/",
-  "https://vt.tiktok.com/ZSHmyKRY3/",
-  "https://vt.tiktok.com/ZSHmyt2JV/",
-  "https://vt.tiktok.com/ZSHmygb51/",
-  "https://vt.tiktok.com/ZSHmyc1Tk/",
-  "https://vt.tiktok.com/ZSHmf8V2c/",
-  "https://vt.tiktok.com/ZSHmfR59J/",
-  "https://vt.tiktok.com/ZSHmyBVJ7/",
-  "https://vt.tiktok.com/ZSHmy53uV/",
-  "https://vt.tiktok.com/ZSHmyabAk/",
-  "https://vt.tiktok.com/ZSHmyjm6M/",
-  "https://vt.tiktok.com/ZSHmyP2YK/",
-  "https://vt.tiktok.com/ZSHmyjgja/",
-  "https://vt.tiktok.com/ZSHmyadep/",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7285626928822897926",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7252692912998272262",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7251815770278120709",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7251947242628713734",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7252017611758832901",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7252107116041800965",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7251816549374332165",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7272374201418337542",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7272373707102850309",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7265825111670803718",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7265824796523416838",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7265469756826815749",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7262998242189724933",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7262607721529101573",
 ];
 
 export const tiktokLinks2022 = [
-  "https://vt.tiktok.com/ZSHmfgMLf/",
-  "https://vt.tiktok.com/ZSHmfgjAL/",
-  "https://vt.tiktok.com/ZSHmfgjRA/",
-  "https://vt.tiktok.com/ZSHmfXJwN/",
-  "https://vt.tiktok.com/ZSHmfw8gU/",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7131587224113532187",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7131296772869115162",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7131179264455478554",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7131176664708500763",
+  "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7130950432377031963",
 ];
 
 export const skills = [
