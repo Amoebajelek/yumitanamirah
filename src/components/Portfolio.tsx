@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
@@ -47,7 +47,6 @@ function InstagramEmbed({ url }: { url: string }) {
       background: "var(--bg-card2)",
       border: "1px solid var(--border)",
       boxShadow: "var(--shadow-card)",
-      transition: "all 0.3s ease",
     }}>
       <iframe
         src={`https://www.instagram.com/reel/${shortcode}/embed/`}
@@ -66,105 +65,84 @@ function InstagramEmbed({ url }: { url: string }) {
   );
 }
 
-/* ── TikTok Embed ── */
+/* ── TikTok Embed using official embed.js ── */
 function TikTokEmbed({ url }: { url: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    // Load TikTok embed script if not already loaded
+    const existingScript = document.querySelector('script[src="https://www.tiktok.com/embed.js"]');
+
+    if (!existingScript) {
+      const script = document.createElement("script");
+      script.src = "https://www.tiktok.com/embed.js";
+      script.async = true;
+      script.onload = () => setLoaded(true);
+      document.body.appendChild(script);
+    } else {
+      setLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Re-process embeds when loaded or URL changes
+    if (loaded && (window as unknown as Record<string, unknown>).tiktokEmbed) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).tiktokEmbed.lib.render(
+        containerRef.current?.querySelectorAll(".tiktok-embed")
+      );
+    }
+  }, [loaded, url]);
+
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
+    <div
+      ref={containerRef}
       style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-        aspectRatio: "9/16",
         borderRadius: "16px",
         overflow: "hidden",
-        textDecoration: "none",
-        background: "linear-gradient(160deg, var(--bg-card2) 0%, var(--bg-card) 100%)",
         border: "1px solid var(--border)",
         boxShadow: "var(--shadow-card)",
-        transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
-        gap: "16px",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-6px) scale(1.02)";
-        e.currentTarget.style.boxShadow = "var(--shadow-glow)";
-        e.currentTarget.style.borderColor = "var(--primary)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0) scale(1)";
-        e.currentTarget.style.boxShadow = "var(--shadow-card)";
-        e.currentTarget.style.borderColor = "var(--border)";
+        background: "var(--bg-card2)",
+        minHeight: "500px",
       }}
     >
-      {/* Decorative circles */}
-      <div style={{
-        position: "absolute",
-        top: "15%",
-        right: "-20%",
-        width: "200px",
-        height: "200px",
-        borderRadius: "50%",
-        background: "radial-gradient(circle, var(--border) 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
-      <div style={{
-        position: "absolute",
-        bottom: "10%",
-        left: "-15%",
-        width: "150px",
-        height: "150px",
-        borderRadius: "50%",
-        background: "radial-gradient(circle, var(--border) 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
-
-      <div style={{
-        width: "64px",
-        height: "64px",
-        borderRadius: "16px",
-        background: "var(--bg)",
-        border: "1px solid var(--border)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}>
-        <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--primary)">
-          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.86a8.18 8.18 0 004.77 1.52V6.95a4.84 4.84 0 01-1-.26z" />
-        </svg>
-      </div>
-
-      <span style={{
-        fontSize: "0.8rem",
-        color: "var(--text-secondary)",
-        fontWeight: 500,
-        letterSpacing: "0.03em",
-      }}>
-        Watch on TikTok
-      </span>
-
-      <div style={{
-        position: "absolute",
-        bottom: "16px",
-        left: "16px",
-        right: "16px",
-        fontSize: "0.6rem",
-        color: "var(--text-muted)",
-        background: "var(--bg)",
-        border: "1px solid var(--border)",
-        padding: "6px 10px",
-        borderRadius: "8px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        textAlign: "center",
-      }}>
-        {url.replace("https://", "")}
-      </div>
-    </a>
+      <blockquote
+        className="tiktok-embed"
+        cite={url}
+        data-video-id=""
+        style={{
+          maxWidth: "100%",
+          minWidth: "100%",
+          margin: 0,
+        }}
+      >
+        <section style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "500px",
+          gap: "12px",
+        }}>
+          <svg viewBox="0 0 24 24" width="40" height="40" fill="var(--primary)" opacity={0.4}>
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.86a8.18 8.18 0 004.77 1.52V6.95a4.84 4.84 0 01-1-.26z" />
+          </svg>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontSize: "0.75rem",
+              color: "var(--text-muted)",
+              textDecoration: "none",
+            }}
+          >
+            Loading TikTok...
+          </a>
+        </section>
+      </blockquote>
+    </div>
   );
 }
 
@@ -178,10 +156,10 @@ export default function Portfolio() {
   const links = dataMap[activeTab];
   const visibleLinks = links.slice(0, visibleCount);
 
-  const handleTabChange = (tab: Tab) => {
+  const handleTabChange = useCallback((tab: Tab) => {
     setActiveTab(tab);
     setVisibleCount(12);
-  };
+  }, []);
 
   return (
     <section id="portfolio" style={{
@@ -253,12 +231,14 @@ export default function Portfolio() {
         {/* Grid */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+          gridTemplateColumns: currentPlatform === "instagram"
+            ? "repeat(auto-fill, minmax(280px, 1fr))"
+            : "repeat(auto-fill, minmax(320px, 1fr))",
           gap: "20px",
         }}>
           {visibleLinks.map((url, i) => (
             <motion.div
-              key={url}
+              key={`${activeTab}-${url}`}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: Math.min(i * 0.04, 0.5) }}
@@ -318,8 +298,8 @@ export default function Portfolio() {
           paddingTop: "24px",
         }}>
           {currentPlatform === "instagram"
-            ? "Konten memuat langsung dari Instagram. Klik konten untuk melihat di Instagram."
-            : "Klik untuk menonton langsung di TikTok."}
+            ? "Konten memuat langsung dari Instagram."
+            : "Konten memuat langsung dari TikTok."}
         </p>
       </div>
     </section>
