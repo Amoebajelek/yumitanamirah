@@ -54,7 +54,7 @@ function InstagramEmbed({ url }: { url: string }) {
       boxShadow: "var(--shadow-card)",
     }}>
       <iframe
-        src={`https://www.instagram.com/reel/${shortcode}/embed/`}
+        src={`https://www.instagram.com/reel/${shortcode}/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fwww.example.com`}
         style={{
           width: "100%",
           height: "100%",
@@ -64,6 +64,8 @@ function InstagramEmbed({ url }: { url: string }) {
         }}
         scrolling="no"
         loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        referrerPolicy="no-referrer-when-downgrade"
         title={`Instagram Reel ${shortcode}`}
       />
     </div>
