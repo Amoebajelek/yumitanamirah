@@ -33,161 +33,41 @@ function extractIGShortcode(url: string): string {
   return match ? match[1] : "";
 }
 
-/* ── Instagram card: cropped iframe + custom overlay ── */
-function InstagramCard({ url, index }: { url: string; index: number }) {
+/* ── Instagram Embed ── */
+function InstagramEmbed({ url }: { url: string }) {
   const shortcode = extractIGShortcode(url);
   if (!shortcode) return null;
 
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        display: "block",
-        position: "relative",
-        aspectRatio: "9/16",
-        borderRadius: "16px",
-        overflow: "hidden",
-        textDecoration: "none",
-        background: "var(--bg-card2)",
-        border: "1px solid var(--border)",
-        boxShadow: "var(--shadow-card)",
-        transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-6px) scale(1.02)";
-        e.currentTarget.style.boxShadow = "var(--shadow-glow)";
-        e.currentTarget.style.borderColor = "var(--primary)";
-        const play = e.currentTarget.querySelector("[data-play]") as HTMLElement;
-        if (play) {
-          play.style.transform = "translate(-50%, -50%) scale(1.15)";
-          play.style.background = "rgba(212,160,23,0.7)";
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0) scale(1)";
-        e.currentTarget.style.boxShadow = "var(--shadow-card)";
-        e.currentTarget.style.borderColor = "var(--border)";
-        const play = e.currentTarget.querySelector("[data-play]") as HTMLElement;
-        if (play) {
-          play.style.transform = "translate(-50%, -50%) scale(1)";
-          play.style.background = "rgba(0,0,0,0.5)";
-        }
-      }}
-    >
-      {/*
-        Cropped iframe: scale up the embed and shift it so only the
-        video thumbnail is visible. The header (~56px) and footer (~90px)
-        of Instagram's embed chrome are pushed outside the overflow:hidden
-        container.
-      */}
-      <div style={{
-        position: "absolute",
-        /* pull the iframe upward to hide the IG header */
-        top: "-60px",
-        left: 0,
-        right: 0,
-        /* make it taller to compensate for the shift + hide footer */
-        bottom: "-100px",
-        pointerEvents: "none",
-      }}>
-        <iframe
-          src={`https://www.instagram.com/reel/${shortcode}/embed/`}
-          style={{
-            width: "100%",
-            height: "100%",
-            border: "none",
-          }}
-          scrolling="no"
-          loading="lazy"
-          title={`Instagram Reel ${shortcode}`}
-        />
-      </div>
-
-      {/* Click-capture overlay (sits on top of iframe) */}
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 2,
-      }} />
-
-      {/* Bottom gradient */}
-      <div style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: "45%",
-        background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%)",
-        pointerEvents: "none",
-        zIndex: 3,
-      }} />
-
-      {/* Play button */}
-      <div
-        data-play=""
+    <div style={{
+      position: "relative",
+      aspectRatio: "9/16",
+      borderRadius: "16px",
+      overflow: "hidden",
+      background: "var(--bg-card2)",
+      border: "1px solid var(--border)",
+      boxShadow: "var(--shadow-card)",
+      transition: "all 0.3s ease",
+    }}>
+      <iframe
+        src={`https://www.instagram.com/reel/${shortcode}/embed/`}
         style={{
+          width: "100%",
+          height: "100%",
+          border: "none",
           position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%) scale(1)",
-          width: "52px",
-          height: "52px",
-          borderRadius: "50%",
-          background: "rgba(0,0,0,0.5)",
-          backdropFilter: "blur(6px)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "2px solid rgba(255,255,255,0.3)",
-          zIndex: 4,
-          transition: "all 0.3s ease",
-          pointerEvents: "none",
+          inset: 0,
         }}
-      >
-        <svg width="20" height="22" viewBox="0 0 24 24" fill="white">
-          <path d="M8 5.14v14l11-7-11-7z" />
-        </svg>
-      </div>
-
-      {/* Bottom info */}
-      <div style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        padding: "14px 16px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        zIndex: 4,
-        pointerEvents: "none",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-            <rect x="2" y="2" width="20" height="20" rx="5" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
-            <circle cx="12" cy="12" r="5" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
-            <circle cx="17.5" cy="6.5" r="1.5" fill="rgba(255,255,255,0.9)" />
-          </svg>
-          <span style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}>Reel</span>
-        </div>
-        <span style={{
-          fontSize: "0.62rem",
-          color: "rgba(255,255,255,0.55)",
-          background: "rgba(0,0,0,0.35)",
-          padding: "2px 8px",
-          borderRadius: "4px",
-        }}>
-          #{index + 1}
-        </span>
-      </div>
-    </a>
+        scrolling="no"
+        loading="lazy"
+        title={`Instagram Reel ${shortcode}`}
+      />
+    </div>
   );
 }
 
-/* ── TikTok card ── */
-function TikTokCard({ url, index }: { url: string; index: number }) {
+/* ── TikTok Embed ── */
+function TikTokEmbed({ url }: { url: string }) {
   return (
     <a
       href={url}
@@ -242,7 +122,6 @@ function TikTokCard({ url, index }: { url: string; index: number }) {
         pointerEvents: "none",
       }} />
 
-      {/* TikTok icon */}
       <div style={{
         width: "64px",
         height: "64px",
@@ -265,17 +144,6 @@ function TikTokCard({ url, index }: { url: string; index: number }) {
         letterSpacing: "0.03em",
       }}>
         Watch on TikTok
-      </span>
-
-      <span style={{
-        fontSize: "0.65rem",
-        color: "var(--text-muted)",
-        background: "var(--bg)",
-        border: "1px solid var(--border)",
-        padding: "4px 12px",
-        borderRadius: "20px",
-      }}>
-        Video #{index + 1}
       </span>
 
       <div style={{
@@ -385,7 +253,7 @@ export default function Portfolio() {
         {/* Grid */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
           gap: "20px",
         }}>
           {visibleLinks.map((url, i) => (
@@ -396,9 +264,9 @@ export default function Portfolio() {
               transition={{ duration: 0.4, delay: Math.min(i * 0.04, 0.5) }}
             >
               {currentPlatform === "instagram" ? (
-                <InstagramCard url={url} index={i} />
+                <InstagramEmbed url={url} />
               ) : (
-                <TikTokCard url={url} index={i} />
+                <TikTokEmbed url={url} />
               )}
             </motion.div>
           ))}
@@ -450,7 +318,7 @@ export default function Portfolio() {
           paddingTop: "24px",
         }}>
           {currentPlatform === "instagram"
-            ? "Klik untuk menonton langsung di Instagram."
+            ? "Konten memuat langsung dari Instagram. Klik konten untuk melihat di Instagram."
             : "Klik untuk menonton langsung di TikTok."}
         </p>
       </div>
