@@ -10,128 +10,117 @@ export default function Contact() {
       <section
         id="contact"
         style={{
-          padding: "120px 40px",
+          padding: "100px 40px",
           background: "var(--bg-alt)",
-          borderTop: "1px solid var(--border)",
           textAlign: "center",
           position: "relative",
           overflow: "hidden",
         }}
         ref={ref}
       >
-        {/* Background gradient orbs */}
-        <div style={{
-          position: "absolute",
-          top: "0",
-          left: "20%",
-          width: "400px",
-          height: "400px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%)",
-          pointerEvents: "none",
-          filter: "blur(40px)",
-        }} />
-        <div style={{
-          position: "absolute",
-          bottom: "0",
-          right: "20%",
-          width: "300px",
-          height: "300px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(196,127,23,0.06) 0%, transparent 70%)",
-          pointerEvents: "none",
-          filter: "blur(40px)",
-        }} />
+        {/* Decorative elements */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          style={{
+            position: "absolute",
+            top: "10%",
+            right: "10%",
+            fontSize: "2.5rem",
+            color: "var(--accent-orange)",
+            opacity: 0.4,
+            pointerEvents: "none",
+          }}
+        >
+          &#x2726;
+        </motion.div>
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          style={{
+            position: "absolute",
+            bottom: "15%",
+            left: "8%",
+            fontSize: "2rem",
+            color: "var(--accent-purple)",
+            opacity: 0.3,
+            pointerEvents: "none",
+          }}
+        >
+          &#x2605;
+        </motion.div>
 
         <div style={{ maxWidth: "700px", margin: "0 auto", position: "relative" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7 }}
           >
-            {/* Decorative line */}
-            <div style={{
-              width: "2px",
-              height: "60px",
-              background: "var(--gradient-1)",
-              margin: "0 auto 40px",
-              borderRadius: "2px",
-            }} />
+            <span className="badge" style={{ marginBottom: "16px" }}>Get in Touch</span>
 
-            <p style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "var(--primary)", textTransform: "uppercase", marginBottom: "16px", fontWeight: 500 }}>
-              Get in Touch
-            </p>
             <h2 style={{
-              fontFamily: "Playfair Display, serif",
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              fontWeight: 700,
+              fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+              fontWeight: 800,
               lineHeight: 1.1,
-              marginBottom: "24px",
+              marginBottom: "20px",
+              letterSpacing: "-0.02em",
             }}>
-              Let&apos;s work
+              Let&apos;s Work
               <br />
-              <em style={{
-                fontStyle: "italic",
-                background: "var(--gradient-1)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>together</em>
+              <span style={{ color: "var(--primary)" }}>Together</span>
             </h2>
-            <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, fontSize: "0.95rem", marginBottom: "48px" }}>
+            <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, fontSize: "1rem", marginBottom: "40px", fontWeight: 400 }}>
               Tertarik berkolaborasi atau ingin mengundang saya sebagai narasumber?
               <br />
               Mari terhubung melalui platform berikut.
             </p>
 
-            <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", marginBottom: "48px" }}>
+            <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginBottom: "48px" }}>
               <a
                 href="mailto:Andiyumitanamirah@gmail.com"
                 style={{
-                  padding: "14px 32px",
-                  background: "var(--gradient-1)",
+                  padding: "16px 36px",
+                  background: "var(--primary)",
                   color: "#fff",
                   textDecoration: "none",
-                  fontSize: "0.8rem",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  fontWeight: 500,
-                  transition: "all 0.3s ease",
+                  fontSize: "0.95rem",
+                  fontWeight: 700,
+                  transition: "all 0.2s ease",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  borderRadius: "8px",
-                  boxShadow: "0 4px 20px rgba(212, 160, 23, 0.3)",
+                  borderRadius: "100px",
                 }}
                 onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "var(--primary-dark)";
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 8px 30px rgba(212, 160, 23, 0.4)";
+                  e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 58, 0.3)";
                 }}
                 onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "var(--primary)";
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 20px rgba(212, 160, 23, 0.3)";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                Email Me
+                Email Me &#x2197;
               </a>
               <a
                 href="https://wa.me/6281315198387"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  padding: "14px 32px",
+                  padding: "16px 36px",
                   background: "transparent",
-                  border: "1px solid var(--border-hover)",
-                  color: "var(--text-secondary)",
+                  border: "2px solid var(--border)",
+                  color: "var(--text)",
                   textDecoration: "none",
-                  fontSize: "0.8rem",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  transition: "all 0.3s",
+                  fontSize: "0.95rem",
+                  fontWeight: 700,
+                  transition: "all 0.2s",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  borderRadius: "8px",
+                  borderRadius: "100px",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "var(--accent-teal)";
@@ -139,8 +128,8 @@ export default function Contact() {
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border-hover)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
+                  e.currentTarget.style.borderColor = "var(--border)";
+                  e.currentTarget.style.color = "var(--text)";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
@@ -149,11 +138,11 @@ export default function Contact() {
             </div>
 
             {/* Social links */}
-            <div style={{ display: "flex", gap: "32px", justifyContent: "center", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "24px", justifyContent: "center", flexWrap: "wrap" }}>
               {[
-                { label: "Instagram", url: "https://www.instagram.com/namirah.yumita", color: "var(--secondary)" },
-                { label: "TikTok", url: "https://www.tiktok.com/@namirah.yumita", color: "var(--accent-teal)" },
-                { label: "LinkedIn", url: "https://linkedin.com/in/andi-yumita-namirah-51444a243/", color: "var(--accent-blue)" },
+                { label: "Instagram", url: "https://www.instagram.com/namirah.yumita" },
+                { label: "TikTok", url: "https://www.tiktok.com/@namirah.yumita" },
+                { label: "LinkedIn", url: "https://linkedin.com/in/andi-yumita-namirah-51444a243/" },
               ].map((s) => (
                 <a
                   key={s.label}
@@ -163,17 +152,17 @@ export default function Contact() {
                   style={{
                     color: "var(--text-muted)",
                     textDecoration: "none",
-                    fontSize: "0.8rem",
-                    letterSpacing: "0.08em",
+                    fontSize: "0.9rem",
+                    fontWeight: 500,
                     transition: "color 0.2s",
                     display: "flex",
                     alignItems: "center",
-                    gap: "6px",
+                    gap: "4px",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = s.color)}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
                 >
-                  {s.label} ↗
+                  {s.label} &#x2197;
                 </a>
               ))}
             </div>
@@ -183,7 +172,7 @@ export default function Contact() {
 
       {/* Footer */}
       <footer style={{
-        padding: "32px 40px",
+        padding: "28px 40px",
         borderTop: "1px solid var(--border)",
         display: "flex",
         justifyContent: "space-between",
@@ -193,18 +182,14 @@ export default function Contact() {
         background: "var(--bg)",
       }}>
         <span style={{
-          fontFamily: "Playfair Display, serif",
-          fontSize: "1rem",
-          background: "var(--gradient-1)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          fontWeight: 700,
+          fontSize: "1.1rem",
+          fontWeight: 800,
+          color: "var(--text)",
         }}>
-          Yumita Namirah
+          YN<span style={{ color: "var(--primary)" }}>.</span>
         </span>
-        <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
-          &copy; {new Date().getFullYear()} &middot; Social Media Specialist & Content Creator &middot; Jakarta, Indonesia
+        <span style={{ fontSize: "0.82rem", color: "var(--text-muted)", fontWeight: 400 }}>
+          &copy; {new Date().getFullYear()} Yumita Namirah &middot; Social Media Specialist & Content Creator &middot; Jakarta
         </span>
       </footer>
     </>

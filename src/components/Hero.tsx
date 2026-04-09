@@ -9,167 +9,190 @@ export default function Hero() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
         padding: "120px 40px 80px",
         position: "relative",
         overflow: "hidden",
-        textAlign: "center",
-        background: "var(--gradient-hero)",
+        maxWidth: "1200px",
+        margin: "0 auto",
       }}
     >
-      {/* Decorative gradient orbs */}
-      <div style={{
-        position: "absolute",
-        top: "10%",
-        left: "5%",
-        width: "500px",
-        height: "500px",
-        borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(212,160,23,0.1) 0%, transparent 70%)",
-        pointerEvents: "none",
-        filter: "blur(40px)",
-      }} />
-      <div style={{
-        position: "absolute",
-        bottom: "10%",
-        right: "5%",
-        width: "400px",
-        height: "400px",
-        borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(196,127,23,0.08) 0%, transparent 70%)",
-        pointerEvents: "none",
-        filter: "blur(40px)",
-      }} />
-      <div style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "600px",
-        height: "600px",
-        borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(232,184,48,0.06) 0%, transparent 70%)",
-        pointerEvents: "none",
-        filter: "blur(60px)",
-      }} />
-
-      {/* Decorative line */}
+      {/* Decorative stars */}
       <motion.div
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 1.2, delay: 0.2 }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         style={{
-          width: "2px",
-          height: "80px",
-          background: "var(--gradient-1)",
-          marginBottom: "40px",
-          transformOrigin: "top",
-          borderRadius: "2px",
-        }}
-      />
-
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.4 }}
-        style={{
-          fontSize: "0.75rem",
-          letterSpacing: "0.3em",
-          textTransform: "uppercase",
-          color: "var(--primary)",
-          marginBottom: "24px",
-          fontWeight: 500,
+          position: "absolute",
+          top: "15%",
+          right: "10%",
+          fontSize: "3rem",
+          color: "var(--accent-orange)",
+          opacity: 0.7,
+          pointerEvents: "none",
         }}
       >
-        Social Media Specialist & Content Creator
-      </motion.p>
+        &#x2726;
+      </motion.div>
+      <motion.div
+        animate={{ rotate: -360 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        style={{
+          position: "absolute",
+          top: "60%",
+          left: "5%",
+          fontSize: "2rem",
+          color: "var(--primary)",
+          opacity: 0.5,
+          pointerEvents: "none",
+        }}
+      >
+        &#x2726;
+      </motion.div>
+      <motion.div
+        animate={{ y: [-5, 5, -5] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: "absolute",
+          bottom: "20%",
+          right: "15%",
+          fontSize: "1.5rem",
+          color: "var(--accent-purple)",
+          opacity: 0.5,
+          pointerEvents: "none",
+        }}
+      >
+        &#x2605;
+      </motion.div>
 
+      {/* Badge */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        style={{ marginBottom: "24px" }}
+      >
+        <span style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "8px 18px",
+          background: "var(--badge-bg)",
+          color: "var(--badge-text)",
+          borderRadius: "100px",
+          fontSize: "0.85rem",
+          fontWeight: 600,
+        }}>
+          <span style={{
+            width: "8px",
+            height: "8px",
+            borderRadius: "50%",
+            background: "var(--primary)",
+          }} />
+          Social Media Specialist & Content Creator
+        </span>
+      </motion.div>
+
+      {/* Main heading */}
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.6 }}
+        transition={{ duration: 0.7, delay: 0.4 }}
         style={{
-          fontFamily: "Playfair Display, serif",
-          fontSize: "clamp(3rem, 8vw, 7rem)",
-          fontWeight: 700,
+          fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+          fontWeight: 800,
           lineHeight: 1.05,
-          marginBottom: "16px",
+          marginBottom: "24px",
           color: "var(--text)",
+          letterSpacing: "-0.02em",
         }}
       >
-        Yumita
+        Level Up Your Content!{" "}
+        <span style={{ color: "var(--primary)" }}>Pro Editing</span>
         <br />
-        <em style={{
-          fontStyle: "italic",
-          background: "var(--gradient-1)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-        }}>Namirah</em>
+        Without The Hassle!
       </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, delay: 0.9 }}
-        style={{
-          fontSize: "0.85rem",
-          letterSpacing: "0.15em",
-          color: "var(--text-muted)",
-          marginBottom: "48px",
-          textTransform: "uppercase",
-        }}
-      >
-        S.S — Jakarta, Indonesia
-      </motion.p>
-
+      {/* Subtitle bullets */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 1.1 }}
-        style={{ display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        style={{
+          display: "flex",
+          gap: "24px",
+          flexWrap: "wrap",
+          marginBottom: "40px",
+        }}
+      >
+        {["7+ Years Experience", "2K+ Contents Created", "Brand Voice Expert"].map((item) => (
+          <span key={item} style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            fontSize: "0.9rem",
+            color: "var(--text-secondary)",
+            fontWeight: 500,
+          }}>
+            <span style={{
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              background: "var(--text-muted)",
+            }} />
+            {item}
+          </span>
+        ))}
+      </motion.div>
+
+      {/* CTA buttons */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        style={{ display: "flex", gap: "14px", flexWrap: "wrap", alignItems: "center" }}
       >
         <a
           href="#portfolio"
           style={{
-            padding: "14px 36px",
-            background: "var(--gradient-1)",
+            padding: "16px 36px",
+            background: "var(--primary)",
             color: "#fff",
             textDecoration: "none",
-            fontSize: "0.8rem",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            transition: "all 0.3s ease",
-            display: "inline-block",
-            borderRadius: "8px",
-            fontWeight: 500,
-            boxShadow: "0 4px 20px rgba(212, 160, 23, 0.3)",
+            fontSize: "0.95rem",
+            fontWeight: 700,
+            borderRadius: "100px",
+            transition: "all 0.2s ease",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
           }}
           onMouseEnter={(e) => {
+            e.currentTarget.style.background = "var(--primary-dark)";
             e.currentTarget.style.transform = "translateY(-2px)";
-            e.currentTarget.style.boxShadow = "0 8px 30px rgba(212, 160, 23, 0.4)";
+            e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 58, 0.3)";
           }}
           onMouseLeave={(e) => {
+            e.currentTarget.style.background = "var(--primary)";
             e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow = "0 4px 20px rgba(212, 160, 23, 0.3)";
+            e.currentTarget.style.boxShadow = "none";
           }}
         >
-          View Portfolio
+          See Portfolio &#x2197;
         </a>
         <a
           href="#contact"
           style={{
-            padding: "14px 36px",
-            border: "1px solid var(--border-hover)",
-            color: "var(--text-secondary)",
+            padding: "16px 36px",
+            border: "2px solid var(--border)",
+            color: "var(--text)",
             textDecoration: "none",
-            fontSize: "0.8rem",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            transition: "all 0.3s ease",
+            fontSize: "0.95rem",
+            fontWeight: 700,
+            borderRadius: "100px",
+            transition: "all 0.2s ease",
             background: "transparent",
-            display: "inline-block",
-            borderRadius: "8px",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = "var(--primary)";
@@ -177,8 +200,8 @@ export default function Hero() {
             e.currentTarget.style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "var(--border-hover)";
-            e.currentTarget.style.color = "var(--text-secondary)";
+            e.currentTarget.style.borderColor = "var(--border)";
+            e.currentTarget.style.color = "var(--text)";
             e.currentTarget.style.transform = "translateY(0)";
           }}
         >
@@ -186,44 +209,43 @@ export default function Hero() {
         </a>
       </motion.div>
 
-      {/* Social links */}
+      {/* Social links at bottom */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, delay: 1.3 }}
+        transition={{ duration: 0.6, delay: 1.0 }}
         style={{
-          position: "absolute",
-          bottom: "40px",
-          left: "50%",
-          transform: "translateX(-50%)",
+          marginTop: "64px",
           display: "flex",
           gap: "24px",
+          flexWrap: "wrap",
         }}
       >
         {[
-          { label: "Instagram", url: "https://www.instagram.com/namirah.yumita", color: "var(--secondary)" },
-          { label: "TikTok", url: "https://www.tiktok.com/@namirah.yumita", color: "var(--accent-teal)" },
-          { label: "LinkedIn", url: "https://linkedin.com/in/andi-yumita-namirah-51444a243/", color: "var(--accent-blue)" },
-        ].map((social, i) => (
-          <span key={social.label} style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            {i > 0 && <span style={{ color: "var(--border)", userSelect: "none" }}>&middot;</span>}
-            <a
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "var(--text-muted)",
-                textDecoration: "none",
-                fontSize: "0.75rem",
-                letterSpacing: "0.1em",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = social.color)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-            >
-              {social.label}
-            </a>
-          </span>
+          { label: "Instagram", url: "https://www.instagram.com/namirah.yumita" },
+          { label: "TikTok", url: "https://www.tiktok.com/@namirah.yumita" },
+          { label: "LinkedIn", url: "https://linkedin.com/in/andi-yumita-namirah-51444a243/" },
+        ].map((social) => (
+          <a
+            key={social.label}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: "var(--text-muted)",
+              textDecoration: "none",
+              fontSize: "0.85rem",
+              fontWeight: 500,
+              transition: "color 0.2s",
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+          >
+            {social.label} &#x2197;
+          </a>
         ))}
       </motion.div>
     </section>

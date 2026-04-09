@@ -38,7 +38,6 @@ function extractTikTokVideoId(url: string): string {
   return match ? match[1] : "";
 }
 
-/* ── Instagram Embed ── */
 function InstagramEmbed({ url }: { url: string }) {
   const shortcode = extractIGShortcode(url);
   if (!shortcode) return null;
@@ -47,7 +46,7 @@ function InstagramEmbed({ url }: { url: string }) {
     <div style={{
       position: "relative",
       aspectRatio: "9/16",
-      borderRadius: "16px",
+      borderRadius: "20px",
       overflow: "hidden",
       background: "var(--bg-card2)",
       border: "1px solid var(--border)",
@@ -72,7 +71,6 @@ function InstagramEmbed({ url }: { url: string }) {
   );
 }
 
-/* ── TikTok Embed ── */
 function TikTokEmbed({ url }: { url: string }) {
   const videoId = extractTikTokVideoId(url);
   if (!videoId) return null;
@@ -81,7 +79,7 @@ function TikTokEmbed({ url }: { url: string }) {
     <div style={{
       position: "relative",
       aspectRatio: "9/16",
-      borderRadius: "16px",
+      borderRadius: "20px",
       overflow: "hidden",
       background: "var(--bg-card2)",
       border: "1px solid var(--border)",
@@ -121,64 +119,63 @@ export default function Portfolio() {
 
   return (
     <section id="portfolio" style={{
-      padding: "120px 40px",
+      padding: "100px 40px",
       background: "var(--bg-alt)",
-      borderTop: "1px solid var(--border)",
-      borderBottom: "1px solid var(--border)",
     }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }} ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          style={{ marginBottom: "48px" }}
+          transition={{ duration: 0.6 }}
+          style={{ marginBottom: "40px" }}
         >
-          <p style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "var(--primary)", textTransform: "uppercase", marginBottom: "16px", fontWeight: 500 }}>Work</p>
-          <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 600, marginBottom: "8px" }}>
-            Content{" "}
-            <em style={{
-              fontStyle: "italic",
-              background: "var(--gradient-1)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}>Portfolio</em>
+          <span className="badge" style={{ marginBottom: "16px" }}>Work</span>
+          <h2 style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "8px" }}>
+            Content <span style={{ color: "var(--primary)" }}>Portfolio</span>
           </h2>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", fontWeight: 400 }}>
             {links.length} karya tersedia di tab ini
           </p>
         </motion.div>
 
         {/* Tabs */}
-        <div style={{ display: "flex", gap: "8px", marginBottom: "40px", flexWrap: "wrap" }}>
+        <div style={{
+          display: "flex",
+          gap: "8px",
+          marginBottom: "36px",
+          flexWrap: "wrap",
+          background: "var(--pill-bg)",
+          padding: "4px",
+          borderRadius: "100px",
+          width: "fit-content",
+        }}>
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => handleTabChange(tab.id)}
               style={{
-                padding: "10px 22px",
-                background: activeTab === tab.id ? "var(--gradient-1)" : "var(--bg-card)",
-                border: `1px solid ${activeTab === tab.id ? "transparent" : "var(--border)"}`,
-                color: activeTab === tab.id ? "#fff" : "var(--text-muted)",
-                fontSize: "0.75rem",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
+                padding: "10px 20px",
+                background: activeTab === tab.id ? "var(--pill-active-bg)" : "transparent",
+                border: "none",
+                color: activeTab === tab.id ? "var(--pill-active-text)" : "var(--text-muted)",
+                fontSize: "0.82rem",
                 cursor: "pointer",
-                transition: "all 0.3s ease",
-                fontFamily: "DM Sans, sans-serif",
-                borderRadius: "10px",
-                fontWeight: activeTab === tab.id ? 600 : 400,
-                boxShadow: activeTab === tab.id ? "0 4px 16px rgba(212,160,23,0.25)" : "none",
+                transition: "all 0.2s ease",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                borderRadius: "100px",
+                fontWeight: activeTab === tab.id ? 700 : 500,
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
               }}
             >
               {tab.label}
               <span style={{
-                marginLeft: "8px",
-                fontSize: "0.65rem",
-                opacity: 0.8,
-                background: activeTab === tab.id ? "rgba(255,255,255,0.2)" : "var(--border)",
-                padding: "2px 7px",
-                borderRadius: "5px",
+                fontSize: "0.7rem",
+                opacity: 0.7,
+                background: activeTab === tab.id ? "rgba(255,255,255,0.15)" : "var(--border)",
+                padding: "2px 8px",
+                borderRadius: "100px",
               }}>
                 {dataMap[tab.id].length}
               </span>
@@ -214,29 +211,25 @@ export default function Portfolio() {
             <button
               onClick={() => setVisibleCount(prev => prev + 12)}
               style={{
-                padding: "14px 48px",
-                background: "var(--bg-card)",
-                border: "1px solid var(--border-hover)",
-                color: "var(--text-secondary)",
-                fontSize: "0.8rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
+                padding: "14px 40px",
+                background: "var(--primary)",
+                border: "none",
+                color: "#fff",
+                fontSize: "0.9rem",
                 cursor: "pointer",
-                transition: "all 0.3s",
-                fontFamily: "DM Sans, sans-serif",
-                borderRadius: "10px",
-                fontWeight: 500,
+                transition: "all 0.2s",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                borderRadius: "100px",
+                fontWeight: 700,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "var(--gradient-1)";
-                e.currentTarget.style.borderColor = "transparent";
-                e.currentTarget.style.color = "#fff";
-                e.currentTarget.style.boxShadow = "0 4px 16px rgba(212,160,23,0.25)";
+                e.currentTarget.style.background = "var(--primary-dark)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 58, 0.3)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "var(--bg-card)";
-                e.currentTarget.style.borderColor = "var(--border-hover)";
-                e.currentTarget.style.color = "var(--text-secondary)";
+                e.currentTarget.style.background = "var(--primary)";
+                e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
@@ -247,11 +240,9 @@ export default function Portfolio() {
 
         <p style={{
           marginTop: "32px",
-          fontSize: "0.75rem",
+          fontSize: "0.82rem",
           color: "var(--text-muted)",
           textAlign: "center",
-          borderTop: "1px solid var(--border)",
-          paddingTop: "24px",
         }}>
           {currentPlatform === "instagram"
             ? "Konten memuat langsung dari Instagram."
