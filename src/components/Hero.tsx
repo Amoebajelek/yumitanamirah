@@ -9,7 +9,7 @@ export default function Hero() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        padding: "120px 40px 80px",
+        padding: "120px 20px 80px",
         position: "relative",
         overflow: "hidden",
         maxWidth: "1200px",

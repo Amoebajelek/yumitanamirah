@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
@@ -27,6 +27,17 @@ const dataMap: Record<Tab, string[]> = {
   tiktok2023: tiktokLinks2023,
   tiktok2022: tiktokLinks2022,
 };
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
 
 function extractIGShortcode(url: string): string {
   const match = url.match(/reel\/([A-Za-z0-9_-]+)/);
@@ -103,23 +114,27 @@ function TikTokEmbed({ url }: { url: string }) {
 }
 
 export default function Portfolio() {
+  const isMobile = useIsMobile();
+  const defaultCount = isMobile ? 4 : 12;
+
   const [activeTab, setActiveTab] = useState<Tab>("2026");
-  const [visibleCount, setVisibleCount] = useState(12);
+  const [visibleCount, setVisibleCount] = useState(defaultCount);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.05 });
 
   const currentTab = tabs.find(t => t.id === activeTab);
   const currentPlatform = currentTab?.platform ?? "instagram";
   const links = dataMap[activeTab];
   const visibleLinks = links.slice(0, visibleCount);
+  const hasMore = visibleCount < links.length;
 
   const handleTabChange = useCallback((tab: Tab) => {
     setActiveTab(tab);
-    setVisibleCount(12);
-  }, []);
+    setVisibleCount(isMobile ? 4 : 12);
+  }, [isMobile]);
 
   return (
     <section id="portfolio" style={{
-      padding: "100px 40px",
+      padding: "80px 20px",
       background: "var(--bg-alt)",
     }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }} ref={ref}>
@@ -127,54 +142,54 @@ export default function Portfolio() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          style={{ marginBottom: "40px" }}
+          style={{ marginBottom: "32px" }}
         >
           <span className="badge" style={{ marginBottom: "16px" }}>Work</span>
-          <h2 style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "8px" }}>
+          <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "8px" }}>
             Content <span style={{ color: "var(--primary)" }}>Portfolio</span>
           </h2>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", fontWeight: 400 }}>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", fontWeight: 400 }}>
             {links.length} karya tersedia di tab ini
           </p>
         </motion.div>
 
         {/* Tabs */}
-        <div style={{
+        <div className="portfolio-tabs" style={{
           display: "flex",
-          gap: "8px",
-          marginBottom: "36px",
+          gap: "6px",
+          marginBottom: "32px",
           flexWrap: "wrap",
           background: "var(--pill-bg)",
           padding: "4px",
-          borderRadius: "100px",
-          width: "fit-content",
+          borderRadius: "16px",
         }}>
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => handleTabChange(tab.id)}
               style={{
-                padding: "10px 20px",
+                padding: "9px 16px",
                 background: activeTab === tab.id ? "var(--pill-active-bg)" : "transparent",
                 border: "none",
                 color: activeTab === tab.id ? "var(--pill-active-text)" : "var(--text-muted)",
-                fontSize: "0.82rem",
+                fontSize: "0.78rem",
                 cursor: "pointer",
                 transition: "all 0.2s ease",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
-                borderRadius: "100px",
+                borderRadius: "12px",
                 fontWeight: activeTab === tab.id ? 700 : 500,
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
+                gap: "6px",
+                whiteSpace: "nowrap",
               }}
             >
               {tab.label}
               <span style={{
-                fontSize: "0.7rem",
+                fontSize: "0.65rem",
                 opacity: 0.7,
                 background: activeTab === tab.id ? "rgba(255,255,255,0.15)" : "var(--border)",
-                padding: "2px 8px",
+                padding: "2px 7px",
                 borderRadius: "100px",
               }}>
                 {dataMap[tab.id].length}
@@ -184,10 +199,10 @@ export default function Portfolio() {
         </div>
 
         {/* Grid */}
-        <div style={{
+        <div className="portfolio-grid" style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: "20px",
+          gap: "16px",
         }}>
           {visibleLinks.map((url, i) => (
             <motion.div
@@ -205,13 +220,13 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* Load more */}
-        {visibleCount < links.length && (
-          <div style={{ textAlign: "center", marginTop: "48px" }}>
+        {/* Show All / Load More */}
+        {hasMore && (
+          <div style={{ textAlign: "center", marginTop: "40px" }}>
             <button
-              onClick={() => setVisibleCount(prev => prev + 12)}
+              onClick={() => setVisibleCount(links.length)}
               style={{
-                padding: "14px 40px",
+                padding: "14px 36px",
                 background: "var(--primary)",
                 border: "none",
                 color: "#fff",
@@ -233,13 +248,44 @@ export default function Portfolio() {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              Load More ({links.length - visibleCount} remaining)
+              Show All ({links.length - visibleCount} more)
+            </button>
+          </div>
+        )}
+
+        {/* Collapse button when expanded beyond default */}
+        {!hasMore && visibleCount > defaultCount && (
+          <div style={{ textAlign: "center", marginTop: "40px" }}>
+            <button
+              onClick={() => setVisibleCount(defaultCount)}
+              style={{
+                padding: "12px 32px",
+                background: "transparent",
+                border: "2px solid var(--border)",
+                color: "var(--text-secondary)",
+                fontSize: "0.85rem",
+                cursor: "pointer",
+                transition: "all 0.2s",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                borderRadius: "100px",
+                fontWeight: 600,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--primary)";
+                e.currentTarget.style.color = "var(--primary)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.color = "var(--text-secondary)";
+              }}
+            >
+              Show Less
             </button>
           </div>
         )}
 
         <p style={{
-          marginTop: "32px",
+          marginTop: "24px",
           fontSize: "0.82rem",
           color: "var(--text-muted)",
           textAlign: "center",
@@ -249,6 +295,15 @@ export default function Portfolio() {
             : "Konten memuat langsung dari TikTok."}
         </p>
       </div>
+
+      <style>{`
+        @media (max-width: 767px) {
+          .portfolio-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+      `}</style>
     </section>
   );
 }

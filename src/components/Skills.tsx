@@ -21,7 +21,7 @@ export default function Skills() {
 
   return (
     <section id="skills" style={{
-      padding: "100px 40px",
+      padding: "80px 20px",
       background: "var(--bg-alt)",
     }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }} ref={ref}>

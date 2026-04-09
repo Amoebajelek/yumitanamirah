@@ -10,7 +10,7 @@ export default function Contact() {
       <section
         id="contact"
         style={{
-          padding: "100px 40px",
+          padding: "80px 20px",
           background: "var(--bg-alt)",
           textAlign: "center",
           position: "relative",
@@ -172,7 +172,7 @@ export default function Contact() {
 
       {/* Footer */}
       <footer style={{
-        padding: "28px 40px",
+        padding: "28px 20px",
         borderTop: "1px solid var(--border)",
         display: "flex",
         justifyContent: "space-between",

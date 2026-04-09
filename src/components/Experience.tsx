@@ -21,7 +21,7 @@ export default function Experience() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="experience" style={{ padding: "100px 40px" }}>
+    <section id="experience" style={{ padding: "80px 20px" }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }} ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
