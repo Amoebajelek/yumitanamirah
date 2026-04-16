@@ -7,94 +7,96 @@ export default function Contact() {
 
   return (
     <>
+      {/* CTA Section */}
       <section
         id="contact"
         style={{
           padding: "80px 20px",
-          background: "var(--bg-alt)",
-          textAlign: "center",
+          background: "var(--hero-bg)",
           position: "relative",
           overflow: "hidden",
         }}
         ref={ref}
       >
-        {/* Decorative elements */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          style={{
-            position: "absolute",
-            top: "10%",
-            right: "10%",
-            fontSize: "2.5rem",
-            color: "var(--accent-orange)",
-            opacity: 0.4,
-            pointerEvents: "none",
-          }}
-        >
-          &#x2726;
-        </motion.div>
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          style={{
-            position: "absolute",
-            bottom: "15%",
-            left: "8%",
-            fontSize: "2rem",
-            color: "var(--accent-purple)",
-            opacity: 0.3,
-            pointerEvents: "none",
-          }}
-        >
-          &#x2605;
-        </motion.div>
+        {/* Background glow */}
+        <div style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(255, 92, 53, 0.1) 0%, transparent 70%)",
+          pointerEvents: "none",
+          filter: "blur(40px)",
+        }} />
 
-        <div style={{ maxWidth: "700px", margin: "0 auto", position: "relative" }}>
+        <div style={{ maxWidth: "700px", margin: "0 auto", position: "relative", textAlign: "center" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            <span className="badge" style={{ marginBottom: "16px" }}>Get in Touch</span>
+            <span style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "6px 16px",
+              background: "rgba(255, 92, 53, 0.12)",
+              color: "var(--primary)",
+              borderRadius: "100px",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              border: "1px solid rgba(255, 92, 53, 0.2)",
+              marginBottom: "20px",
+            }}>
+              &#x2728; Let&apos;s Connect
+            </span>
 
             <h2 style={{
-              fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+              fontSize: "clamp(2rem, 5vw, 3rem)",
               fontWeight: 800,
-              lineHeight: 1.1,
-              marginBottom: "20px",
+              lineHeight: 1.15,
+              marginBottom: "16px",
+              color: "var(--hero-text)",
               letterSpacing: "-0.02em",
             }}>
-              Let&apos;s Work
+              Have An Awesome Project
               <br />
-              <span style={{ color: "var(--primary)" }}>Together</span>
+              Idea? <span style={{ color: "var(--primary)" }}>Let&apos;s Discuss</span>
             </h2>
-            <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, fontSize: "1rem", marginBottom: "40px", fontWeight: 400 }}>
+            <p style={{
+              color: "var(--hero-text-secondary)",
+              lineHeight: 1.7,
+              fontSize: "0.95rem",
+              marginBottom: "36px",
+            }}>
               Tertarik berkolaborasi atau ingin mengundang saya sebagai narasumber?
-              <br />
               Mari terhubung melalui platform berikut.
             </p>
 
-            <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginBottom: "48px" }}>
+            {/* CTA buttons */}
+            <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", marginBottom: "40px" }}>
               <a
                 href="mailto:Andiyumitanamirah@gmail.com"
                 style={{
-                  padding: "16px 36px",
+                  padding: "14px 36px",
                   background: "var(--primary)",
                   color: "#fff",
                   textDecoration: "none",
-                  fontSize: "0.95rem",
+                  fontSize: "0.9rem",
                   fontWeight: 700,
+                  borderRadius: "100px",
                   transition: "all 0.2s ease",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  borderRadius: "100px",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "var(--primary-dark)";
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 58, 0.3)";
+                  e.currentTarget.style.boxShadow = "0 8px 24px rgba(255, 92, 53, 0.35)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "var(--primary)";
@@ -109,18 +111,18 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  padding: "16px 36px",
-                  background: "transparent",
-                  border: "2px solid var(--border)",
-                  color: "var(--text)",
+                  padding: "14px 36px",
+                  border: "1px solid var(--hero-border)",
+                  color: "var(--hero-text)",
                   textDecoration: "none",
-                  fontSize: "0.95rem",
+                  fontSize: "0.9rem",
                   fontWeight: 700,
+                  borderRadius: "100px",
                   transition: "all 0.2s",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  borderRadius: "100px",
+                  background: "transparent",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "var(--accent-teal)";
@@ -128,8 +130,8 @@ export default function Contact() {
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.color = "var(--text)";
+                  e.currentTarget.style.borderColor = "var(--hero-border)";
+                  e.currentTarget.style.color = "var(--hero-text)";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
@@ -137,12 +139,33 @@ export default function Contact() {
               </a>
             </div>
 
+            {/* Credentials row */}
+            <div style={{ display: "flex", gap: "24px", justifyContent: "center", flexWrap: "wrap", marginBottom: "32px" }}>
+              {[
+                { icon: "&#x2B50;", text: "50+ Brands Served" },
+                { icon: "&#x1F3AC;", text: "7M+ Views" },
+                { icon: "&#x2714;&#xFE0F;", text: "Content Creator Specialist" },
+              ].map((item) => (
+                <span key={item.text} style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "0.8rem",
+                  color: "var(--hero-text-muted)",
+                  fontWeight: 500,
+                }}>
+                  <span dangerouslySetInnerHTML={{ __html: item.icon }} />
+                  {item.text}
+                </span>
+              ))}
+            </div>
+
             {/* Social links */}
             <div style={{ display: "flex", gap: "24px", justifyContent: "center", flexWrap: "wrap" }}>
               {[
                 { label: "Instagram", url: "https://www.instagram.com/namirah.yumita" },
                 { label: "TikTok", url: "https://www.tiktok.com/@namirah.yumita" },
-                { label: "LinkedIn", url: "https://linkedin.com/in/andi-yumita-namirah-51444a243/" },
+                { label: "LinkedIn", url: "https://linkedin.com/in/andiyumitanamirah" },
               ].map((s) => (
                 <a
                   key={s.label}
@@ -150,9 +173,9 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    color: "var(--text-muted)",
+                    color: "var(--hero-text-muted)",
                     textDecoration: "none",
-                    fontSize: "0.9rem",
+                    fontSize: "0.85rem",
                     fontWeight: 500,
                     transition: "color 0.2s",
                     display: "flex",
@@ -160,7 +183,7 @@ export default function Contact() {
                     gap: "4px",
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--hero-text-muted)")}
                 >
                   {s.label} &#x2197;
                 </a>
@@ -171,27 +194,48 @@ export default function Contact() {
       </section>
 
       {/* Footer */}
-      <footer style={{
-        padding: "28px 20px",
-        borderTop: "1px solid var(--border)",
+      <footer className="site-footer" style={{
+        padding: "24px 20px",
+        borderTop: "1px solid var(--hero-border)",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         flexWrap: "wrap",
         gap: "12px",
-        background: "var(--bg)",
+        background: "var(--hero-bg)",
       }}>
-        <span style={{
-          fontSize: "1.1rem",
-          fontWeight: 800,
-          color: "var(--text)",
-        }}>
-          YN<span style={{ color: "var(--primary)" }}>.</span>
-        </span>
-        <span style={{ fontSize: "0.82rem", color: "var(--text-muted)", fontWeight: 400 }}>
-          &copy; {new Date().getFullYear()} Yumita Namirah &middot; Social Media Specialist & Content Creator &middot; Jakarta
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div style={{
+            width: "28px",
+            height: "28px",
+            borderRadius: "50%",
+            background: "var(--primary)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "0.65rem",
+            fontWeight: 800,
+            color: "#fff",
+          }}>
+            YN
+          </div>
+          <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--hero-text)" }}>
+            Yumita Namirah
+          </span>
+        </div>
+        <span style={{ fontSize: "0.78rem", color: "var(--hero-text-muted)", fontWeight: 400 }}>
+          &copy; {new Date().getFullYear()} &middot; Social Media Content Creator &middot; Jakarta, Indonesia
         </span>
       </footer>
+      <style>{`
+        @media (max-width: 767px) {
+          .site-footer {
+            flex-direction: column !important;
+            text-align: center !important;
+            padding: 20px 16px !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

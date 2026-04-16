@@ -4,12 +4,12 @@ import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Yumita Namirah — Social Media Specialist & Content Creator",
-  description: "Portfolio of Yumita Namirah S.S — Social Media Specialist, Content Creator, and Scout Influencer based in Jakarta, Indonesia.",
+  title: "Yumita Namirah — Social Media Content Creator",
+  description: "Portfolio of Yumita Namirah — Social Media Content Creator and Scoutinfluencer based in Jakarta, Indonesia. Served 50+ brands with 7M+ total views.",
   keywords: ["content creator", "social media specialist", "jakarta", "yumita namirah"],
   openGraph: {
-    title: "Yumita Namirah — Content Creator",
-    description: "Social Media Specialist & Content Creator based in Jakarta",
+    title: "Yumita Namirah — Social Media Content Creator",
+    description: "Social Media Content Creator & Scoutinfluencer based in Jakarta",
     type: "website",
   },
 };

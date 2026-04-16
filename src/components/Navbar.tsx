@@ -4,10 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
+  { label: "Home", href: "#" },
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Achievements", href: "#achievements" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -34,131 +35,180 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: scrolled ? "12px 20px" : "20px 20px",
+          padding: scrolled ? "10px 20px" : "16px 20px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
           transition: "all 0.4s ease",
           background: scrolled ? "var(--nav-bg)" : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           borderBottom: scrolled ? "1px solid var(--nav-border)" : "none",
         }}
       >
-        {/* Logo */}
-        <a href="#" style={{
-          fontSize: "1.4rem",
-          textDecoration: "none",
-          fontWeight: 800,
-          color: "var(--text)",
-          display: "flex",
-          alignItems: "center",
-          gap: "4px",
-        }}>
-          YN<span style={{ color: "var(--primary)", fontSize: "1.6rem", lineHeight: 1 }}>.</span>
-        </a>
-
-        {/* Desktop nav */}
         <div style={{
+          maxWidth: "1200px",
+          width: "100%",
           display: "flex",
-          gap: "6px",
           alignItems: "center",
-          background: "var(--pill-bg)",
-          padding: "4px",
-          borderRadius: "100px",
-        }} className="hidden-mobile">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              style={{
-                color: "var(--text-secondary)",
-                textDecoration: "none",
-                fontSize: "0.85rem",
-                padding: "8px 18px",
-                borderRadius: "100px",
-                transition: "all 0.2s",
-                fontWeight: 500,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--text)";
-                e.currentTarget.style.background = "var(--bg-card)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--text-secondary)";
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        {/* Right side */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            style={{
-              background: "var(--pill-bg)",
-              border: "none",
+          justifyContent: "space-between",
+        }}>
+          {/* Brand - left on mobile, center on desktop */}
+          <a href="#" className="show-mobile" style={{
+            display: "none",
+            alignItems: "center",
+            gap: "4px",
+            textDecoration: "none",
+          }}>
+            <div style={{
+              width: "36px",
+              height: "36px",
               borderRadius: "50%",
-              width: "40px",
-              height: "40px",
+              background: "var(--primary)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              cursor: "pointer",
-              fontSize: "1.1rem",
-              transition: "all 0.2s ease",
-            }}
-          >
-            {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}
-          </button>
-
-          <a
-            href="#contact"
-            className="hidden-mobile"
-            style={{
-              padding: "10px 24px",
-              background: "var(--primary)",
+              fontSize: "0.8rem",
+              fontWeight: 800,
               color: "#fff",
-              textDecoration: "none",
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              borderRadius: "100px",
-              transition: "all 0.2s ease",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "6px",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--primary-dark)";
-              e.currentTarget.style.transform = "translateY(-1px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--primary)";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            Let&apos;s Chat &#x2197;
+            }}>
+              YN
+            </div>
           </a>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="show-mobile"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "var(--text)",
-              fontSize: "1.5rem",
-              padding: "4px",
-              display: "none",
-            }}
-          >
-            {menuOpen ? "\u2715" : "\u2630"}
-          </button>
+          {/* Desktop nav - left links */}
+          <div style={{
+            display: "flex",
+            gap: "2px",
+            alignItems: "center",
+            background: "var(--pill-bg)",
+            padding: "4px",
+            borderRadius: "100px",
+            backdropFilter: "blur(10px)",
+          }} className="hidden-mobile">
+            {navLinks.map((link) => (
+              <a
+                key={link.href + link.label}
+                href={link.href}
+                style={{
+                  color: "var(--hero-text-secondary)",
+                  textDecoration: "none",
+                  fontSize: "0.78rem",
+                  padding: "7px 14px",
+                  borderRadius: "100px",
+                  transition: "all 0.2s",
+                  fontWeight: 500,
+                  whiteSpace: "nowrap",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#fff";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "var(--hero-text-secondary)";
+                  e.currentTarget.style.background = "transparent";
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Center brand - desktop only */}
+          <a href="#" className="hidden-mobile nav-brand-center" style={{
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            textDecoration: "none",
+          }}>
+            <div style={{
+              width: "34px",
+              height: "34px",
+              borderRadius: "50%",
+              background: "var(--primary)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "0.75rem",
+              fontWeight: 800,
+              color: "#fff",
+            }}>
+              YN
+            </div>
+          </a>
+
+          {/* Right side */}
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              style={{
+                background: "var(--pill-bg)",
+                border: "none",
+                borderRadius: "50%",
+                width: "36px",
+                height: "36px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                fontSize: "0.95rem",
+                transition: "all 0.2s ease",
+                backdropFilter: "blur(10px)",
+              }}
+            >
+              {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="show-mobile"
+              style={{
+                background: "var(--pill-bg)",
+                border: "none",
+                cursor: "pointer",
+                color: scrolled ? "var(--text)" : "#fff",
+                fontSize: "1.2rem",
+                display: "none",
+                borderRadius: "8px",
+                width: "36px",
+                height: "36px",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {menuOpen ? "\u2715" : "\u2630"}
+            </button>
+
+            <a
+              href="#contact"
+              className="hidden-mobile"
+              style={{
+                padding: "8px 20px",
+                background: "var(--primary)",
+                color: "#fff",
+                textDecoration: "none",
+                fontSize: "0.8rem",
+                fontWeight: 700,
+                borderRadius: "100px",
+                transition: "all 0.2s ease",
+                whiteSpace: "nowrap",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--primary-dark)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "var(--primary)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              Contact Us
+            </a>
+          </div>
         </div>
       </motion.nav>
 
@@ -177,28 +227,28 @@ export default function Navbar() {
               zIndex: 49,
               background: "var(--nav-bg)",
               backdropFilter: "blur(20px)",
-              padding: "20px 20px 28px",
-              borderBottom: "1px solid var(--border)",
+              padding: "16px 20px 24px",
+              borderBottom: "1px solid var(--hero-border)",
               display: "flex",
               flexDirection: "column",
-              gap: "8px",
+              gap: "4px",
             }}
           >
             {navLinks.map((link) => (
               <a
-                key={link.href}
+                key={link.href + link.label}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 style={{
-                  color: "var(--text)",
+                  color: "#fff",
                   textDecoration: "none",
-                  fontSize: "1rem",
+                  fontSize: "0.95rem",
                   fontWeight: 600,
                   padding: "12px 16px",
                   borderRadius: "12px",
                   transition: "background 0.2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--pill-bg)")}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.05)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
               >
                 {link.label}
@@ -213,17 +263,23 @@ export default function Navbar() {
                 color: "#fff",
                 textDecoration: "none",
                 fontSize: "0.9rem",
-                fontWeight: 600,
+                fontWeight: 700,
                 borderRadius: "100px",
                 textAlign: "center",
                 marginTop: "8px",
               }}
             >
-              Let&apos;s Chat &#x2197;
+              Contact Us
             </a>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <style>{`
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .nav-brand-center { display: none !important; }
+        }
+      `}</style>
     </>
   );
 }

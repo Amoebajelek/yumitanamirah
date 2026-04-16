@@ -2,137 +2,173 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
+const highlights = [
+  {
+    icon: "🎬",
+    title: "Video Content Creation",
+    desc: "End-to-end video production from concept, shooting to editing for brands and organizations.",
+    color: "var(--primary)",
+  },
+  {
+    icon: "📊",
+    title: "Content Strategy",
+    desc: "Data-driven content planning, analytics and performance optimization for social media growth.",
+    color: "var(--accent-blue)",
+  },
+  {
+    icon: "🎯",
+    title: "Brand Management",
+    desc: "Managing 10+ brand accounts with consistent voice and visual identity across platforms.",
+    color: "var(--accent-purple)",
+  },
+  {
+    icon: "🌍",
+    title: "Scoutinfluencer",
+    desc: "International experience as social media team at World Scout Jamboree 2023 in South Korea.",
+    color: "var(--accent-teal)",
+  },
+];
+
 export default function About() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 });
 
   return (
-    <section id="about" ref={ref} style={{ padding: "80px 20px", maxWidth: "1200px", margin: "0 auto" }}>
-      {/* Section header */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-        style={{ textAlign: "center", marginBottom: "48px" }}
-      >
-        <span className="badge" style={{ marginBottom: "16px" }}>About Me</span>
-        <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 800, lineHeight: 1.15, letterSpacing: "-0.02em" }}>
-          Crafting Stories That
-          <br />
-          <span style={{ color: "var(--primary)" }}>Resonate & Convert</span>
-        </h2>
-      </motion.div>
-
-      <div className="about-grid" style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "48px",
-        alignItems: "start",
-      }}>
-
-        {/* Left: text */}
+    <section id="about" ref={ref} style={{
+      padding: "80px 20px",
+      background: "var(--bg-alt)",
+    }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          style={{ marginBottom: "48px" }}
         >
-          <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, fontSize: "0.95rem", marginBottom: "20px" }}>
-            Saya adalah Yumita Namirah, Social Media Specialist dan Content Creator berbasis di Jakarta dengan passion mendalam di dunia digital storytelling. Dengan pengalaman sejak 2018, saya telah membangun karier yang menjembatani kreativitas dan strategi konten.
-          </p>
-          <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, fontSize: "0.95rem", marginBottom: "32px" }}>
-            Dari brand komersial hingga gerakan kepramukaan internasional — termasuk World Scout Jamboree di Korea Selatan — saya membawa perspektif unik dalam membangun brand voice yang autentik dan konten yang berdampak nyata.
-          </p>
-
-          <div className="stat-grid" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-            {[
-              { num: "7+", label: "Years Creating", color: "var(--primary)" },
-              { num: "2K+", label: "Contents Made", color: "var(--accent-teal)" },
-              { num: "5+", label: "Brands Handled", color: "var(--accent-purple)" },
-            ].map((stat) => (
-              <div key={stat.label} style={{
-                background: "var(--bg-alt)",
-                padding: "18px 24px",
-                borderRadius: "16px",
-                flex: "1 1 100px",
-                minWidth: "0",
-              }}>
-                <div style={{ fontSize: "1.8rem", color: stat.color, fontWeight: 800, letterSpacing: "-0.02em" }}>{stat.num}</div>
-                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: 500, marginTop: "4px" }}>{stat.label}</div>
-              </div>
-            ))}
+          <span className="badge" style={{ marginBottom: "16px" }}>About Me</span>
+          <div style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: "24px",
+            flexWrap: "wrap",
+          }}>
+            <h2 style={{
+              fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.15,
+            }}>
+              My <span style={{ color: "var(--primary)" }}>Services</span>
+            </h2>
+            <p style={{
+              color: "var(--text-secondary)",
+              fontSize: "0.92rem",
+              maxWidth: "450px",
+              lineHeight: 1.6,
+            }}>
+              Social Media Content Creator berbasis di Jakarta dengan pengalaman sejak 2018. Dari brand komersial hingga organisasi internasional.
+            </p>
           </div>
         </motion.div>
 
-        {/* Right: info card */}
+        <div className="about-services-grid" style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "16px",
+        }}>
+          {highlights.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              style={{
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
+                borderRadius: "20px",
+                padding: "28px 24px",
+                transition: "all 0.2s ease",
+                boxShadow: "var(--shadow-card)",
+                cursor: "default",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = item.color;
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = "var(--shadow-card-hover)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "var(--shadow-card)";
+              }}
+            >
+              <div style={{
+                width: "52px",
+                height: "52px",
+                borderRadius: "16px",
+                background: `${item.color}12`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.5rem",
+                marginBottom: "20px",
+              }}>
+                {item.icon}
+              </div>
+              <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "10px", lineHeight: 1.3 }}>
+                {item.title}
+              </h3>
+              <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.6 }}>
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Profile info bar */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div style={{
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="profile-bar"
+          style={{
+            marginTop: "24px",
             background: "var(--bg-card)",
             border: "1px solid var(--border)",
-            padding: "28px",
             borderRadius: "20px",
+            padding: "24px 32px",
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "24px",
             boxShadow: "var(--shadow-card)",
-            overflow: "hidden",
-          }}>
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              marginBottom: "24px",
-            }}>
-              <div style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: "var(--primary)",
-                flexShrink: 0,
-              }} />
-              <span style={{
-                fontSize: "0.8rem",
-                fontWeight: 600,
-                color: "var(--text-muted)",
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-              }}>
-                Profile
-              </span>
-            </div>
-
-            {[
-              { label: "Full Name", value: "Yumita Namirah, S.S" },
-              { label: "Position", value: "Social Media Specialist & Content Creator" },
-              { label: "Location", value: "Koja, Jakarta Utara, DKI Jakarta" },
-              { label: "Education", value: "S1 Sastra Inggris — Universitas Pertiwi Jakarta" },
-              { label: "Email", value: "Andiyumitanamirah@gmail.com" },
-              { label: "Phone", value: "081315198387 (WA Only)" },
-            ].map((item, i) => (
-              <div key={i} className="profile-row" style={{
-                padding: "12px 0",
-                borderBottom: i < 5 ? "1px solid var(--border)" : "none",
-                display: "grid",
-                gridTemplateColumns: "90px 1fr",
-                gap: "12px",
-                alignItems: "start",
-              }}>
-                <span style={{ fontSize: "0.7rem", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", paddingTop: "3px", letterSpacing: "0.03em" }}>
-                  {item.label}
-                </span>
-                <span style={{ fontSize: "0.85rem", color: "var(--text)", lineHeight: 1.5, fontWeight: 500, wordBreak: "break-word", overflowWrap: "anywhere" }}>{item.value}</span>
+          }}
+        >
+          {[
+            { label: "Education", value: "Bachelor of Literature — English Literature, Universitas Pertiwi" },
+            { label: "Location", value: "Jakarta, Indonesia" },
+            { label: "Language", value: "English (TOEFL: 544) · Basic French" },
+            { label: "Email", value: "Andiyumitanamirah@gmail.com" },
+          ].map((item) => (
+            <div key={item.label}>
+              <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--primary)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>
+                {item.label}
               </div>
-            ))}
-          </div>
+              <div style={{ fontSize: "0.85rem", color: "var(--text)", fontWeight: 500, lineHeight: 1.4, wordBreak: "break-word" }}>
+                {item.value}
+              </div>
+            </div>
+          ))}
         </motion.div>
       </div>
 
       <style>{`
         @media (max-width: 767px) {
-          .about-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-          .profile-row { grid-template-columns: 1fr !important; gap: 4px !important; }
+          .about-services-grid { grid-template-columns: 1fr !important; }
+          .profile-bar { grid-template-columns: 1fr 1fr !important; padding: 20px !important; }
         }
         @media (min-width: 768px) and (max-width: 1023px) {
-          .about-grid { gap: 32px !important; }
+          .about-services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .profile-bar { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
     </section>

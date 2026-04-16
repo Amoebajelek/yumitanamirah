@@ -158,10 +158,11 @@ export default function Portfolio() {
           display: "flex",
           gap: "6px",
           marginBottom: "32px",
-          flexWrap: "wrap",
           background: "var(--pill-bg)",
           padding: "4px",
           borderRadius: "16px",
+          overflowX: "auto",
+          WebkitOverflowScrolling: "touch",
         }}>
           {tabs.map((tab) => (
             <button
@@ -297,6 +298,8 @@ export default function Portfolio() {
       </div>
 
       <style>{`
+        .portfolio-tabs::-webkit-scrollbar { display: none; }
+        .portfolio-tabs { -ms-overflow-style: none; scrollbar-width: none; }
         @media (max-width: 767px) {
           .portfolio-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
         }
