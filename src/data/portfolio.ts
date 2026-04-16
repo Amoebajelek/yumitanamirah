@@ -115,6 +115,64 @@ export const tiktokLinks2022 = [
   "https://www.tiktok.com/@kwarnasgerakanpramuka/video/7130950432377031963",
 ];
 
+// ===== Personal Projects =====
+
+export const travelContent = [
+  "https://www.tiktok.com/@namirah.yumita/video/7545042578589191429",
+  "https://www.tiktok.com/@namirah.yumita/video/7545472991128292614",
+  "https://www.tiktok.com/@namirah.yumita/video/7546141641606810936",
+  "https://www.tiktok.com/@namirah.yumita/video/7351387260836777221",
+  "https://www.tiktok.com/@namirah.yumita/video/7508736276804291846",
+  "https://www.tiktok.com/@namirah.yumita/video/7538082305320144133",
+  "https://www.tiktok.com/@namirah.yumita/video/7538769793592069381",
+  "https://www.tiktok.com/@namirah.yumita/video/7539049384365804805",
+  "https://www.tiktok.com/@namirah.yumita/video/7544359818081897784",
+  "https://www.tiktok.com/@namirah.yumita/video/7342764552997653766",
+  "https://www.tiktok.com/@namirah.yumita/video/7540588543043702072",
+  "https://www.tiktok.com/@namirah.yumita/video/7540883824486419718",
+  "https://www.tiktok.com/@namirah.yumita/video/7540509987072675128",
+  "https://www.tiktok.com/@namirah.yumita/video/7080017893395647771",
+  "https://www.instagram.com/reel/DES5wF0sSCX/",
+];
+
+export const foodiesContent = [
+  "https://www.instagram.com/reel/DWP-AshD4sJ/",
+  "https://www.instagram.com/reel/DS4CD4IkR1N/",
+  "https://www.instagram.com/reel/DNS-chdvxEi/",
+  "https://www.instagram.com/reel/DLeKX6uxv0Y/",
+  "https://www.instagram.com/reel/DLbeimFxnVP/",
+  "https://www.instagram.com/reel/DLAC1S7Pa64/",
+  "https://www.instagram.com/reel/DJibcUKP6ow/",
+  "https://www.instagram.com/reel/DHyw6nnyrq-/",
+  "https://www.instagram.com/reel/DHfcjsCRsSX/",
+  "https://www.instagram.com/reel/DGu2v5zxXs2/",
+  "https://www.instagram.com/reel/DCEaXZ9Ox-T/",
+  "https://www.instagram.com/reel/CxFvQSjJw11/",
+  "https://www.instagram.com/reel/CskHpmlRGjl/",
+];
+
+export const personalBrandingContent = [
+  "https://www.instagram.com/reel/DC3yojzzten/",
+  "https://www.instagram.com/reel/C8oy5-OpVQ1/",
+  "https://www.instagram.com/reel/C-CzB6ryVax/",
+  "https://www.instagram.com/reel/Cy7cE3QJGVD/",
+  "https://www.instagram.com/reel/Cx7qb12JUhc/",
+  "https://www.instagram.com/reel/CnBZq2VDeKq/",
+  "https://www.instagram.com/reel/CoKPdhsJqTp/",
+  "https://www.instagram.com/reel/CXBHHcfp2pN/",
+  "https://www.instagram.com/reel/DVgdjFUEenC/",
+  "https://www.instagram.com/reel/DGLAOG5vlId/",
+];
+
+export const tvPortfolio = [
+  "https://www.instagram.com/reel/Ctz3BBuy-wS/",
+  "https://www.instagram.com/reel/CmLyZFhJ7yV/",
+  "https://www.instagram.com/reel/CkM_lUlJ90e/",
+  "https://www.instagram.com/reel/Cgy3PqhpkWr/",
+  "https://www.instagram.com/reel/CdnW405pICb/",
+  "https://www.instagram.com/reel/Ccyh71SjXNh/",
+];
+
 export const skills = [
   { name: "Content & Data Analytics", icon: "📊", type: "hard" },
   { name: "Content Plan & Strategy", icon: "🗺️", type: "hard" },

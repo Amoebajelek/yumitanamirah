@@ -24,7 +24,7 @@ const highlights = [
   {
     icon: "🌍",
     title: "Scoutinfluencer",
-    desc: "International experience as social media team at World Scout Jamboree 2023 in South Korea.",
+    desc: "Being Influencer for World Scouting Since 2022 and was being Social Media Team at World Scout Jamboree 2023 in South Korea",
     color: "var(--accent-teal)",
   },
 ];
@@ -33,10 +33,14 @@ export default function About() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 });
 
   return (
-    <section id="about" ref={ref} style={{
-      padding: "80px 20px",
-      background: "var(--bg-alt)",
-    }}>
+    <section
+      id="about"
+      ref={ref}
+      style={{
+        padding: "80px 20px",
+        background: "var(--bg-alt)",
+      }}
+    >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -44,38 +48,51 @@ export default function About() {
           transition={{ duration: 0.6 }}
           style={{ marginBottom: "48px" }}
         >
-          <span className="badge" style={{ marginBottom: "16px" }}>About Me</span>
-          <div style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: "24px",
-            flexWrap: "wrap",
-          }}>
-            <h2 style={{
-              fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.15,
-            }}>
+          <span className="badge" style={{ marginBottom: "16px" }}>
+            About Me
+          </span>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: "24px",
+              flexWrap: "wrap",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+                fontWeight: 800,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.15,
+              }}
+            >
               My <span style={{ color: "var(--primary)" }}>Services</span>
             </h2>
-            <p style={{
-              color: "var(--text-secondary)",
-              fontSize: "0.92rem",
-              maxWidth: "450px",
-              lineHeight: 1.6,
-            }}>
-              Social Media Content Creator berbasis di Jakarta dengan pengalaman sejak 2018. Dari brand komersial hingga organisasi internasional.
+            <p
+              style={{
+                color: "var(--text-secondary)",
+                fontSize: "0.92rem",
+                maxWidth: "450px",
+                lineHeight: 1.6,
+              }}
+            >
+              Jakarta-based Social Media Content Creator with professional
+              experience since 2018, collaborating with commercial brands as
+              well as international organizations.
             </p>
           </div>
         </motion.div>
 
-        <div className="about-services-grid" style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "16px",
-        }}>
+        <div
+          className="about-services-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "16px",
+          }}
+        >
           {highlights.map((item, i) => (
             <motion.div
               key={item.title}
@@ -102,23 +119,38 @@ export default function About() {
                 e.currentTarget.style.boxShadow = "var(--shadow-card)";
               }}
             >
-              <div style={{
-                width: "52px",
-                height: "52px",
-                borderRadius: "16px",
-                background: `${item.color}12`,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "1.5rem",
-                marginBottom: "20px",
-              }}>
+              <div
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "16px",
+                  background: `${item.color}12`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "1.5rem",
+                  marginBottom: "20px",
+                }}
+              >
                 {item.icon}
               </div>
-              <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "10px", lineHeight: 1.3 }}>
+              <h3
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 700,
+                  marginBottom: "10px",
+                  lineHeight: 1.3,
+                }}
+              >
                 {item.title}
               </h3>
-              <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.6 }}>
+              <p
+                style={{
+                  fontSize: "0.82rem",
+                  color: "var(--text-muted)",
+                  lineHeight: 1.6,
+                }}
+              >
                 {item.desc}
               </p>
             </motion.div>
@@ -144,16 +176,41 @@ export default function About() {
           }}
         >
           {[
-            { label: "Education", value: "Bachelor of Literature — English Literature, Universitas Pertiwi" },
+            {
+              label: "Education",
+              value:
+                "Bachelor of Literature — English Literature, Universitas Pertiwi",
+            },
             { label: "Location", value: "Jakarta, Indonesia" },
-            { label: "Language", value: "English (TOEFL: 544) · Basic French" },
+            {
+              label: "Language",
+              value:
+                "English (TOEFL: 544) · Basic French · Intermediate Arabic (Muhadatsah)",
+            },
             { label: "Email", value: "Andiyumitanamirah@gmail.com" },
           ].map((item) => (
             <div key={item.label}>
-              <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--primary)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>
+              <div
+                style={{
+                  fontSize: "0.7rem",
+                  fontWeight: 700,
+                  color: "var(--primary)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  marginBottom: "6px",
+                }}
+              >
                 {item.label}
               </div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text)", fontWeight: 500, lineHeight: 1.4, wordBreak: "break-word" }}>
+              <div
+                style={{
+                  fontSize: "0.85rem",
+                  color: "var(--text)",
+                  fontWeight: 500,
+                  lineHeight: 1.4,
+                  wordBreak: "break-word",
+                }}
+              >
                 {item.value}
               </div>
             </div>

@@ -8,17 +8,39 @@ import {
   portfolioLinks2024,
   tiktokLinks2023,
   tiktokLinks2022,
+  travelContent,
+  foodiesContent,
+  personalBrandingContent,
+  tvPortfolio,
 } from "@/data/portfolio";
 
-type Tab = "2026" | "2025" | "2024" | "tiktok2023" | "tiktok2022";
+type Tab = "2026" | "2025" | "2024" | "tiktok2023" | "tiktok2022" | "travel" | "foodies" | "branding" | "tv";
 
-const tabs: { id: Tab; label: string; platform: "instagram" | "tiktok" }[] = [
-  { id: "2026", label: "2026 IG", platform: "instagram" },
-  { id: "2025", label: "2025 IG", platform: "instagram" },
-  { id: "2024", label: "2024 IG", platform: "instagram" },
-  { id: "tiktok2023", label: "2023 TikTok", platform: "tiktok" },
-  { id: "tiktok2022", label: "2022 TikTok", platform: "tiktok" },
+type Platform = "instagram" | "tiktok" | "mixed";
+
+const tabGroups: { label: string; tabs: { id: Tab; label: string; platform: Platform }[] }[] = [
+  {
+    label: "Brand Work",
+    tabs: [
+      { id: "2026", label: "2026 IG", platform: "instagram" },
+      { id: "2025", label: "2025 IG", platform: "instagram" },
+      { id: "2024", label: "2024 IG", platform: "instagram" },
+      { id: "tiktok2023", label: "2023 TikTok", platform: "tiktok" },
+      { id: "tiktok2022", label: "2022 TikTok", platform: "tiktok" },
+    ],
+  },
+  {
+    label: "Personal Project",
+    tabs: [
+      { id: "travel", label: "Travel", platform: "mixed" },
+      { id: "foodies", label: "Foodies", platform: "instagram" },
+      { id: "branding", label: "Personal Branding", platform: "instagram" },
+      { id: "tv", label: "TV Portfolio", platform: "instagram" },
+    ],
+  },
 ];
+
+const allTabs = tabGroups.flatMap(g => g.tabs);
 
 const dataMap: Record<Tab, string[]> = {
   "2026": portfolioLinks2026,
@@ -26,6 +48,10 @@ const dataMap: Record<Tab, string[]> = {
   "2024": portfolioLinks2024,
   tiktok2023: tiktokLinks2023,
   tiktok2022: tiktokLinks2022,
+  travel: travelContent,
+  foodies: foodiesContent,
+  branding: personalBrandingContent,
+  tv: tvPortfolio,
 };
 
 function useIsMobile() {
@@ -121,7 +147,7 @@ export default function Portfolio() {
   const [visibleCount, setVisibleCount] = useState(defaultCount);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.05 });
 
-  const currentTab = tabs.find(t => t.id === activeTab);
+  const currentTab = allTabs.find(t => t.id === activeTab);
   const currentPlatform = currentTab?.platform ?? "instagram";
   const links = dataMap[activeTab];
   const visibleLinks = links.slice(0, visibleCount);
@@ -154,48 +180,66 @@ export default function Portfolio() {
         </motion.div>
 
         {/* Tabs */}
-        <div className="portfolio-tabs" style={{
-          display: "flex",
-          gap: "6px",
-          marginBottom: "32px",
-          background: "var(--pill-bg)",
-          padding: "4px",
-          borderRadius: "16px",
-          overflowX: "auto",
-          WebkitOverflowScrolling: "touch",
-        }}>
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => handleTabChange(tab.id)}
-              style={{
-                padding: "9px 16px",
-                background: activeTab === tab.id ? "var(--pill-active-bg)" : "transparent",
-                border: "none",
-                color: activeTab === tab.id ? "var(--pill-active-text)" : "var(--text-muted)",
-                fontSize: "0.78rem",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-                borderRadius: "12px",
-                fontWeight: activeTab === tab.id ? 700 : 500,
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {tab.label}
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
+          {tabGroups.map((group) => (
+            <div key={group.label} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <span style={{
-                fontSize: "0.65rem",
-                opacity: 0.7,
-                background: activeTab === tab.id ? "rgba(255,255,255,0.15)" : "var(--border)",
-                padding: "2px 7px",
-                borderRadius: "100px",
+                fontSize: "0.68rem",
+                fontWeight: 700,
+                color: "var(--text-muted)",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                whiteSpace: "nowrap",
+                flexShrink: 0,
               }}>
-                {dataMap[tab.id].length}
+                {group.label}
               </span>
-            </button>
+              <div className="portfolio-tabs" style={{
+                display: "flex",
+                gap: "4px",
+                background: "var(--pill-bg)",
+                padding: "4px",
+                borderRadius: "14px",
+                overflowX: "auto",
+                WebkitOverflowScrolling: "touch",
+                flexShrink: 1,
+                minWidth: 0,
+              }}>
+                {group.tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => handleTabChange(tab.id)}
+                    style={{
+                      padding: "8px 14px",
+                      background: activeTab === tab.id ? "var(--pill-active-bg)" : "transparent",
+                      border: "none",
+                      color: activeTab === tab.id ? "var(--pill-active-text)" : "var(--text-muted)",
+                      fontSize: "0.75rem",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                      fontFamily: "Plus Jakarta Sans, sans-serif",
+                      borderRadius: "10px",
+                      fontWeight: activeTab === tab.id ? 700 : 500,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {tab.label}
+                    <span style={{
+                      fontSize: "0.6rem",
+                      opacity: 0.7,
+                      background: activeTab === tab.id ? "rgba(255,255,255,0.15)" : "var(--border)",
+                      padding: "2px 6px",
+                      borderRadius: "100px",
+                    }}>
+                      {dataMap[tab.id].length}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
 
@@ -212,7 +256,7 @@ export default function Portfolio() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: Math.min(i * 0.04, 0.5) }}
             >
-              {currentPlatform === "instagram" ? (
+              {(currentPlatform === "mixed" ? (url.includes("tiktok.com") ? "tiktok" : "instagram") : currentPlatform) === "instagram" ? (
                 <InstagramEmbed url={url} />
               ) : (
                 <TikTokEmbed url={url} />
@@ -291,7 +335,9 @@ export default function Portfolio() {
           color: "var(--text-muted)",
           textAlign: "center",
         }}>
-          {currentPlatform === "instagram"
+          {currentPlatform === "mixed"
+            ? "Konten memuat langsung dari Instagram & TikTok."
+            : currentPlatform === "instagram"
             ? "Konten memuat langsung dari Instagram."
             : "Konten memuat langsung dari TikTok."}
         </p>
