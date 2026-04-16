@@ -221,7 +221,7 @@ export default function Hero() {
                     letterSpacing: "-0.02em",
                   }}
                 >
-                  7M+
+                  15M+
                 </div>
                 <span
                   style={{
@@ -385,8 +385,8 @@ export default function Hero() {
             >
               <div
                 style={{
-                  fontSize: "0.9rem",
-                  fontWeight: 700,
+                  fontSize: "1.4rem",
+                  fontWeight: 800,
                   color: "#fff",
                   marginBottom: "3px",
                 }}
@@ -396,7 +396,7 @@ export default function Hero() {
               <div
                 style={{
                   fontSize: "0.72rem",
-                  color: "var(--hero-text-muted)",
+                  color: "var(--hero-text-secondary)",
                   fontWeight: 500,
                 }}
               >
@@ -423,7 +423,7 @@ export default function Hero() {
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             style={{
               position: "absolute",
-              bottom: "10%",
+              bottom: "18%",
               left: "-10%",
               background: "rgba(13, 13, 26, 0.8)",
               backdropFilter: "blur(16px)",
