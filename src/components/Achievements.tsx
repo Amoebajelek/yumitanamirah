@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { achievements } from "@/data/portfolio";
+import { useLanguage } from "./LanguageProvider";
 
 const years = ["2025", "2024", "2023", "2022", "2021", "2020", "2017"];
 
@@ -20,6 +21,7 @@ function useIsMobile() {
 export default function Achievements() {
   const isMobile = useIsMobile();
   const defaultCount = isMobile ? 5 : achievements.length;
+  const { locale } = useLanguage();
 
   const [activeYear, setActiveYear] = useState<string>("all");
   const [visibleCount, setVisibleCount] = useState(defaultCount);
@@ -46,11 +48,15 @@ export default function Achievements() {
           transition={{ duration: 0.6 }}
           style={{ marginBottom: "40px" }}
         >
-          <span className="badge" style={{ marginBottom: "16px" }}>Recognition</span>
+          <span className="badge" style={{ marginBottom: "16px" }}>
+            {locale === "id" ? "Pencapaian" : "Recognition"}
+          </span>
           <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>
-            Achievements &
+            {locale === "id" ? "Prestasi &" : "Achievements &"}
             <br />
-            <span style={{ color: "var(--primary)" }}>Certificates</span>
+            <span style={{ color: "var(--primary)" }}>
+              {locale === "id" ? "Sertifikat" : "Certificates"}
+            </span>
           </h2>
         </motion.div>
 
@@ -85,7 +91,7 @@ export default function Achievements() {
                 whiteSpace: "nowrap",
               }}
             >
-              {y === "all" ? "All" : y}
+              {y === "all" ? (locale === "id" ? "Semua" : "All") : y}
             </button>
           ))}
         </div>
@@ -152,7 +158,7 @@ export default function Achievements() {
                       borderRadius: "100px",
                       flexShrink: 0,
                     }}>
-                      International
+                      {locale === "id" ? "Internasional" : "International"}
                     </span>
                   )}
                   {ach.level === "nasional" && (
@@ -165,7 +171,7 @@ export default function Achievements() {
                       borderRadius: "100px",
                       flexShrink: 0,
                     }}>
-                      Nasional
+                      {locale === "id" ? "Nasional" : "National"}
                     </span>
                   )}
                   {ach.award && (
@@ -178,7 +184,7 @@ export default function Achievements() {
                       borderRadius: "100px",
                       flexShrink: 0,
                     }}>
-                      Award
+                      {locale === "id" ? "Penghargaan" : "Award"}
                     </span>
                   )}
                   <h3 style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text)", lineHeight: 1.3 }}>{ach.title}</h3>
@@ -227,7 +233,9 @@ export default function Achievements() {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              Show All ({filtered.length - visibleCount} more)
+              {locale === "id"
+                ? `Tampilkan Semua (${filtered.length - visibleCount} lagi)`
+                : `Show All (${filtered.length - visibleCount} more)`}
             </button>
           </div>
         )}
@@ -258,7 +266,7 @@ export default function Achievements() {
                 e.currentTarget.style.color = "var(--text-secondary)";
               }}
             >
-              Show Less
+              {locale === "id" ? "Tampilkan Lebih Sedikit" : "Show Less"}
             </button>
           </div>
         )}

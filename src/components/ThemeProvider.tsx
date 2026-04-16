@@ -18,14 +18,18 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") as Theme | null;
-    if (saved) {
-      setTheme(saved);
-      document.documentElement.setAttribute("data-theme", saved);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
-    setMounted(true);
+
+    queueMicrotask(() => {
+      if (saved) {
+        setTheme(saved);
+        document.documentElement.setAttribute("data-theme", saved);
+      } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        setTheme("dark");
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+
+      setMounted(true);
+    });
   }, []);
 
   const toggleTheme = () => {

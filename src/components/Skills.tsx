@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { skills } from "@/data/portfolio";
+import { useLanguage } from "./LanguageProvider";
 
 const skillColors = [
   "var(--primary)",
@@ -20,9 +21,24 @@ const skillColors = [
 
 export default function Skills() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { locale } = useLanguage();
 
   const hardSkills = skills.filter((s) => s.type === "hard");
   const softSkills = skills.filter((s) => s.type === "soft");
+  const skillTranslations: Record<string, string> = {
+    "Content & Data Analytics": "Analitik Konten & Data",
+    "Content Plan & Strategy": "Perencanaan & Strategi Konten",
+    "Content Writing & Copywriting": "Penulisan Konten & Copywriting",
+    "Content Shooting": "Pengambilan Konten",
+    "Video Editing (Capcut, VN)": "Editing Video (Capcut, VN)",
+    "Canva & Visual Design": "Canva & Desain Visual",
+    "Ms Office": "Ms Office",
+    "Project Management": "Manajemen Proyek",
+    "Analytical Thinking": "Berpikir Analitis",
+    "Problem Solving": "Pemecahan Masalah",
+    "Good Communication": "Komunikasi yang Baik",
+    "Teamwork & Leadership": "Kerja Sama Tim & Kepemimpinan",
+  };
 
   return (
     <section
@@ -37,7 +53,7 @@ export default function Skills() {
           style={{ textAlign: "center", marginBottom: "48px" }}
         >
           <span className="badge" style={{ marginBottom: "16px" }}>
-            Expertise
+            {locale === "id" ? "Keahlian" : "Expertise"}
           </span>
           <h2
             style={{
@@ -46,7 +62,10 @@ export default function Skills() {
               letterSpacing: "-0.02em",
             }}
           >
-            Technical <span style={{ color: "var(--primary)" }}>Skills</span>
+            {locale === "id" ? "Kemampuan" : "Technical"}{" "}
+            <span style={{ color: "var(--primary)" }}>
+              {locale === "id" ? "Teknis" : "Skills"}
+            </span>
           </h2>
         </motion.div>
 
@@ -64,7 +83,7 @@ export default function Skills() {
               marginBottom: "16px",
             }}
           >
-            Hard Skills
+            {locale === "id" ? "Hard Skills" : "Hard Skills"}
           </span>
           <div
             style={{
@@ -123,7 +142,9 @@ export default function Skills() {
                       color: "var(--text)",
                     }}
                   >
-                    {skill.name}
+                    {locale === "id"
+                      ? skillTranslations[skill.name] ?? skill.name
+                      : skill.name}
                   </span>
                 </motion.div>
               );
@@ -145,7 +166,7 @@ export default function Skills() {
               marginBottom: "16px",
             }}
           >
-            Soft Skills
+            {locale === "id" ? "Soft Skills" : "Soft Skills"}
           </span>
           <div
             style={{
@@ -208,7 +229,9 @@ export default function Skills() {
                       color: "var(--text)",
                     }}
                   >
-                    {skill.name}
+                    {locale === "id"
+                      ? skillTranslations[skill.name] ?? skill.name
+                      : skill.name}
                   </span>
                 </motion.div>
               );
@@ -243,7 +266,7 @@ export default function Skills() {
               borderRadius: "100px",
             }}
           >
-            Language
+            {locale === "id" ? "Bahasa" : "Language"}
           </span>
           <span
             style={{
@@ -252,7 +275,7 @@ export default function Skills() {
               color: "var(--text)",
             }}
           >
-            English — TOEFL: 544
+            {locale === "id" ? "Bahasa Inggris — TOEFL: 544" : "English — TOEFL: 544"}
           </span>
           <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>
             |
@@ -264,7 +287,7 @@ export default function Skills() {
               color: "var(--text-secondary)",
             }}
           >
-            Basic French (UNJ)
+            {locale === "id" ? "Bahasa Prancis Dasar (UNJ)" : "Basic French (UNJ)"}
           </span>
           <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>
             |
@@ -276,7 +299,9 @@ export default function Skills() {
               color: "var(--text-secondary)",
             }}
           >
-            Intermediate Arabic (Muhadatsah)
+            {locale === "id"
+              ? "Bahasa Arab Menengah (Muhadatsah)"
+              : "Intermediate Arabic (Muhadatsah)"}
           </span>
         </motion.div>
       </div>

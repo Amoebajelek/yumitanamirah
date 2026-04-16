@@ -1,9 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Contact() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { locale } = useLanguage();
 
   return (
     <>
@@ -51,7 +53,7 @@ export default function Contact() {
               border: "1px solid rgba(255, 92, 53, 0.2)",
               marginBottom: "20px",
             }}>
-              &#x2728; Let&apos;s Connect
+              &#x2728; {locale === "id" ? "Mari Terhubung" : "Let's Connect"}
             </span>
 
             <h2 style={{
@@ -62,9 +64,13 @@ export default function Contact() {
               color: "var(--hero-text)",
               letterSpacing: "-0.02em",
             }}>
-              Have An Awesome Project
+              {locale === "id" ? "Punya Ide Proyek" : "Have An Awesome Project"}
               <br />
-              Idea? <span style={{ color: "var(--primary)" }}>Let&apos;s Discuss</span>
+              {locale === "id" ? (
+                <span style={{ color: "var(--primary)" }}>Menarik? Mari Diskusikan</span>
+              ) : (
+                <span style={{ color: "var(--primary)" }}>Let&apos;s Discuss</span>
+              )}
             </h2>
             <p style={{
               color: "var(--hero-text-secondary)",
@@ -72,8 +78,9 @@ export default function Contact() {
               fontSize: "0.95rem",
               marginBottom: "36px",
             }}>
-              Tertarik berkolaborasi atau ingin mengundang saya sebagai narasumber?
-              Mari terhubung melalui platform berikut.
+              {locale === "id"
+                ? "Tertarik berkolaborasi atau ingin mengundang saya sebagai narasumber? Mari terhubung melalui platform berikut."
+                : "Interested in collaborating or inviting me as a speaker? Let’s connect through the platforms below."}
             </p>
 
             {/* CTA buttons */}
@@ -104,7 +111,7 @@ export default function Contact() {
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                Email Me &#x2197;
+                {locale === "id" ? "Kirim Email" : "Email Me"} &#x2197;
               </a>
               <a
                 href="https://wa.me/6281315198387"
@@ -142,9 +149,18 @@ export default function Contact() {
             {/* Credentials row */}
             <div style={{ display: "flex", gap: "24px", justifyContent: "center", flexWrap: "wrap", marginBottom: "32px" }}>
               {[
-                { icon: "&#x2B50;", text: "50+ Brands Served" },
+                {
+                  icon: "&#x2B50;",
+                  text: locale === "id" ? "50+ Brand Ditangani" : "50+ Brands Served",
+                },
                 { icon: "&#x1F3AC;", text: "7M+ Views" },
-                { icon: "&#x2714;&#xFE0F;", text: "Content Creator Specialist" },
+                {
+                  icon: "&#x2714;&#xFE0F;",
+                  text:
+                    locale === "id"
+                      ? "Spesialis Content Creator"
+                      : "Content Creator Specialist",
+                },
               ].map((item) => (
                 <span key={item.text} style={{
                   display: "flex",
@@ -224,7 +240,11 @@ export default function Contact() {
           </span>
         </div>
         <span style={{ fontSize: "0.78rem", color: "var(--hero-text-muted)", fontWeight: 400 }}>
-          &copy; {new Date().getFullYear()} &middot; Social Media Content Creator &middot; Jakarta, Indonesia
+          &copy; {new Date().getFullYear()} &middot;{" "}
+          {locale === "id"
+            ? "Social Media Content Creator"
+            : "Social Media Content Creator"}{" "}
+          &middot; Jakarta, Indonesia
         </span>
       </footer>
       <style>{`

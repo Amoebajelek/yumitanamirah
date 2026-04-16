@@ -2,6 +2,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useLanguage } from "./LanguageProvider";
 import {
   portfolioLinks2026,
   portfolioLinks2025,
@@ -158,6 +159,7 @@ function TikTokEmbed({ url }: { url: string }) {
 export default function Portfolio() {
   const isMobile = useIsMobile();
   const defaultCount = isMobile ? 4 : 12;
+  const { locale } = useLanguage();
 
   const [activeTab, setActiveTab] = useState<Tab>("2026");
   const [visibleCount, setVisibleCount] = useState(defaultCount);
@@ -168,6 +170,51 @@ export default function Portfolio() {
   const links = dataMap[activeTab];
   const visibleLinks = links.slice(0, visibleCount);
   const hasMore = visibleCount < links.length;
+  const localizedTabGroups = [
+    {
+      label: locale === "id" ? "Karya Brand" : "Brand Work",
+      tabs: [
+        { id: "2026" as const, label: "2026 IG", platform: "instagram" as const },
+        { id: "2025" as const, label: "2025 IG", platform: "instagram" as const },
+        { id: "2024" as const, label: "2024 IG", platform: "instagram" as const },
+        {
+          id: "tiktok2023" as const,
+          label: "2023 TikTok",
+          platform: "tiktok" as const,
+        },
+        {
+          id: "tiktok2022" as const,
+          label: "2022 TikTok",
+          platform: "tiktok" as const,
+        },
+      ],
+    },
+    {
+      label: locale === "id" ? "Proyek Personal" : "Personal Project",
+      tabs: [
+        {
+          id: "travel" as const,
+          label: locale === "id" ? "Travel" : "Travel",
+          platform: "mixed" as const,
+        },
+        {
+          id: "foodies" as const,
+          label: locale === "id" ? "Kuliner" : "Foodies",
+          platform: "instagram" as const,
+        },
+        {
+          id: "branding" as const,
+          label: locale === "id" ? "Personal Branding" : "Personal Branding",
+          platform: "instagram" as const,
+        },
+        {
+          id: "tv" as const,
+          label: locale === "id" ? "Portofolio TV" : "TV Portfolio",
+          platform: "instagram" as const,
+        },
+      ],
+    },
+  ];
 
   const handleTabChange = useCallback(
     (tab: Tab) => {
@@ -193,7 +240,7 @@ export default function Portfolio() {
           style={{ marginBottom: "32px" }}
         >
           <span className="badge" style={{ marginBottom: "16px" }}>
-            Work
+            {locale === "id" ? "Karya" : "Work"}
           </span>
           <h2
             style={{
@@ -203,7 +250,10 @@ export default function Portfolio() {
               marginBottom: "8px",
             }}
           >
-            Content <span style={{ color: "var(--primary)" }}>Portfolio</span>
+            {locale === "id" ? "Portofolio" : "Content"}{" "}
+            <span style={{ color: "var(--primary)" }}>
+              {locale === "id" ? "Konten" : "Portfolio"}
+            </span>
           </h2>
           <p
             style={{
@@ -212,7 +262,9 @@ export default function Portfolio() {
               fontWeight: 400,
             }}
           >
-            {links.length} works available in this tab.
+            {locale === "id"
+              ? `${links.length} karya tersedia di tab ini.`
+              : `${links.length} works available in this tab.`}
           </p>
         </motion.div>
 
@@ -225,7 +277,7 @@ export default function Portfolio() {
             marginBottom: "32px",
           }}
         >
-          {tabGroups.map((group) => (
+          {localizedTabGroups.map((group) => (
             <div
               key={group.label}
               style={{ display: "flex", alignItems: "center", gap: "10px" }}
@@ -364,7 +416,9 @@ export default function Portfolio() {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              Show All ({links.length - visibleCount} more)
+              {locale === "id"
+                ? `Tampilkan Semua (${links.length - visibleCount} lagi)`
+                : `Show All (${links.length - visibleCount} more)`}
             </button>
           </div>
         )}
@@ -395,7 +449,7 @@ export default function Portfolio() {
                 e.currentTarget.style.color = "var(--text-secondary)";
               }}
             >
-              Show Less
+              {locale === "id" ? "Tampilkan Lebih Sedikit" : "Show Less"}
             </button>
           </div>
         )}

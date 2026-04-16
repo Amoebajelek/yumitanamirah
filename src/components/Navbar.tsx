@@ -1,21 +1,29 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "./LanguageProvider";
 import { useTheme } from "./ThemeProvider";
-
-const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
-];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { locale, toggleLocale } = useLanguage();
+
+  const navLinks = [
+    { label: locale === "id" ? "Beranda" : "Home", href: "#" },
+    { label: locale === "id" ? "Tentang" : "About", href: "#about" },
+    {
+      label: locale === "id" ? "Pengalaman" : "Experience",
+      href: "#experience",
+    },
+    {
+      label: locale === "id" ? "Portofolio" : "Portfolio",
+      href: "#portfolio",
+    },
+    { label: locale === "id" ? "Keahlian" : "Skills", href: "#skills" },
+    { label: locale === "id" ? "Kontak" : "Contact", href: "#contact" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -142,6 +150,30 @@ export default function Navbar() {
           {/* Right side */}
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <button
+              onClick={toggleLocale}
+              aria-label="Toggle language"
+              style={{
+                background: "var(--pill-bg)",
+                border: "1px solid var(--hero-border)",
+                borderRadius: "999px",
+                minWidth: "52px",
+                height: "36px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                color: "#fff",
+                transition: "all 0.2s ease",
+                backdropFilter: "blur(10px)",
+                padding: "0 12px",
+              }}
+            >
+              {locale === "id" ? "EN" : "ID"}
+            </button>
+
+            <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
               style={{
@@ -206,7 +238,7 @@ export default function Navbar() {
                 e.currentTarget.style.transform = "translateY(0)";
               }}
             >
-              Contact Us
+              {locale === "id" ? "Hubungi Saya" : "Contact Us"}
             </a>
           </div>
         </div>
@@ -254,6 +286,25 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <button
+              onClick={toggleLocale}
+              style={{
+                padding: "12px 16px",
+                background: "transparent",
+                border: "1px solid var(--hero-border)",
+                color: "#fff",
+                fontSize: "0.9rem",
+                fontWeight: 700,
+                borderRadius: "12px",
+                textAlign: "left",
+                marginTop: "8px",
+                cursor: "pointer",
+              }}
+            >
+              {locale === "id"
+                ? "Switch ke English"
+                : "Switch to Bahasa Indonesia"}
+            </button>
             <a
               href="#contact"
               onClick={() => setMenuOpen(false)}
@@ -269,7 +320,7 @@ export default function Navbar() {
                 marginTop: "8px",
               }}
             >
-              Contact Us
+              {locale === "id" ? "Hubungi Saya" : "Contact Us"}
             </a>
           </motion.div>
         )}

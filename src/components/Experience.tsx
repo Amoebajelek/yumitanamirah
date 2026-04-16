@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { experiences } from "@/data/portfolio";
+import { useLanguage } from "./LanguageProvider";
 
 const typeColors: Record<string, string> = {
   "full-time": "var(--accent-teal)",
@@ -19,6 +20,7 @@ const typeLabels: Record<string, string> = {
 
 export default function Experience() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { locale } = useLanguage();
 
   return (
     <section id="experience" style={{ padding: "80px 20px" }}>
@@ -29,9 +31,14 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           style={{ textAlign: "center", marginBottom: "48px" }}
         >
-          <span className="badge" style={{ marginBottom: "16px" }}>Career</span>
+          <span className="badge" style={{ marginBottom: "16px" }}>
+            {locale === "id" ? "Karier" : "Career"}
+          </span>
           <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>
-            My Work <span style={{ color: "var(--primary)" }}>Experience</span>
+            {locale === "id" ? "Pengalaman" : "My Work"}{" "}
+            <span style={{ color: "var(--primary)" }}>
+              {locale === "id" ? "Kerja" : "Experience"}
+            </span>
           </h2>
         </motion.div>
 
@@ -77,7 +84,15 @@ export default function Experience() {
                       padding: "4px 10px",
                       borderRadius: "100px",
                     }}>
-                      {typeLabels[exp.type]}
+                      {locale === "id"
+                        ? exp.type === "full-time"
+                          ? "Penuh Waktu"
+                          : exp.type === "organization"
+                            ? "Organisasi"
+                            : exp.type === "freelance"
+                              ? "Freelance"
+                              : "Creator"
+                        : typeLabels[exp.type]}
                     </span>
                     {exp.current && (
                       <span style={{
@@ -92,7 +107,7 @@ export default function Experience() {
                         gap: "4px",
                       }}>
                         <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--accent-green)" }} />
-                        Active
+                        {locale === "id" ? "Aktif" : "Active"}
                       </span>
                     )}
                   </div>

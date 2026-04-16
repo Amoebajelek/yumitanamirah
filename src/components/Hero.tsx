@@ -1,7 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Hero() {
+  const { locale } = useLanguage();
+
   return (
     <section
       style={{
@@ -74,7 +77,7 @@ export default function Hero() {
               }}
             >
               <span style={{ fontSize: "1.1rem" }}>&#x1F44B;</span>
-              Hello!
+              {locale === "id" ? "Halo!" : "Hello!"}
             </span>
           </motion.div>
 
@@ -92,9 +95,10 @@ export default function Hero() {
               letterSpacing: "-0.03em",
             }}
           >
-            I&apos;m <span style={{ color: "var(--primary)" }}>Namirah</span>,
+            {locale === "id" ? "Saya" : "I’m"}{" "}
+            <span style={{ color: "var(--primary)" }}>Namirah</span>,
             <br />
-            Content Creator
+            {locale === "id" ? "Content Creator" : "Content Creator"}
           </motion.h1>
 
           {/* Testimonial / tagline */}
@@ -129,8 +133,9 @@ export default function Hero() {
                   marginBottom: "12px",
                 }}
               >
-                Social Media Content Creator with 50+ brands served and 7M+
-                total views. Turning stories into scroll-stopping content.
+                {locale === "id"
+                  ? "Social Media Content Creator dengan pengalaman menangani 50+ brand dan total 7M+ views. Mengubah cerita menjadi konten yang membuat orang berhenti scroll."
+                  : "Social Media Content Creator with 50+ brands served and 7M+ total views. Turning stories into scroll-stopping content."}
               </p>
               <div
                 style={{ display: "flex", gap: "16px", alignItems: "center" }}
@@ -155,7 +160,7 @@ export default function Hero() {
                     fontWeight: 500,
                   }}
                 >
-                  Highly recommended
+                  {locale === "id" ? "Sangat direkomendasikan" : "Highly recommended"}
                 </span>
               </div>
             </div>
@@ -192,7 +197,7 @@ export default function Hero() {
                   fontWeight: 500,
                 }}
               >
-                Brands Served
+                {locale === "id" ? "Brand Ditangani" : "Brands Served"}
               </div>
             </div>
             <div
@@ -226,7 +231,7 @@ export default function Hero() {
                     borderRadius: "6px",
                   }}
                 >
-                  Views
+                  {locale === "id" ? "Views" : "Views"}
                 </span>
               </div>
               <div
@@ -236,7 +241,7 @@ export default function Hero() {
                   fontWeight: 500,
                 }}
               >
-                Total Reach
+                {locale === "id" ? "Total Jangkauan" : "Total Reach"}
               </div>
             </div>
           </motion.div>
@@ -276,7 +281,7 @@ export default function Hero() {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              Portfolio &#x2197;
+              {locale === "id" ? "Portofolio" : "Portfolio"} &#x2197;
             </a>
             <a
               href="#contact"
@@ -305,7 +310,7 @@ export default function Hero() {
                 e.currentTarget.style.transform = "translateY(0)";
               }}
             >
-              Hire Me
+              {locale === "id" ? "Ajak Kolaborasi" : "Hire Me"}
             </a>
           </motion.div>
         </div>
@@ -341,7 +346,7 @@ export default function Hero() {
             style={{
               width: "100%",
               maxWidth: "420px",
-              aspectRatio: "3/4",
+              aspectRatio: "1/1",
               borderRadius: "32px",
               overflow: "hidden",
               position: "relative",
@@ -350,71 +355,50 @@ export default function Hero() {
               border: "1px solid var(--hero-border)",
             }}
           >
-            {/*
-              GANTI DENGAN FOTO PROFIL:
-              1. Taruh foto di /public/profile.jpg
-              2. Uncomment tag <img> di bawah dan hapus placeholder div
-            */}
-            {/* <img src="/profile.jpg" alt="Yumita Namirah" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> */}
-
-            {/* Placeholder — remove when photo is added */}
-            <div
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/profile.jpg"
+              alt="Yumita Namirah"
               style={{
                 width: "100%",
                 height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                background:
-                  "linear-gradient(135deg, #1a1a35 0%, #0D0D1A 50%, var(--primary-dark) 100%)",
-                position: "relative",
+                objectFit: "cover",
+                objectPosition: "center top",
+              }}
+            />
+
+            {/* Name card overlay */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: "20px",
+                left: "20px",
+                right: "20px",
+                background: "rgba(0,0,0,0.45)",
+                backdropFilter: "blur(12px)",
+                borderRadius: "14px",
+                padding: "14px 18px",
+                border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
               <div
                 style={{
-                  fontSize: "6rem",
-                  fontWeight: 800,
-                  color: "rgba(255, 92, 53, 0.15)",
-                  letterSpacing: "-0.05em",
-                  lineHeight: 1,
-                  userSelect: "none",
+                  fontSize: "0.9rem",
+                  fontWeight: 700,
+                  color: "#fff",
+                  marginBottom: "3px",
                 }}
               >
-                YN
+                Yumita Namirah
               </div>
               <div
                 style={{
-                  position: "absolute",
-                  bottom: "24px",
-                  left: "24px",
-                  right: "24px",
-                  background: "rgba(0,0,0,0.4)",
-                  backdropFilter: "blur(12px)",
-                  borderRadius: "16px",
-                  padding: "16px 20px",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  fontSize: "0.72rem",
+                  color: "var(--hero-text-muted)",
+                  fontWeight: 500,
                 }}
               >
-                <div
-                  style={{
-                    fontSize: "0.95rem",
-                    fontWeight: 700,
-                    color: "#fff",
-                    marginBottom: "4px",
-                  }}
-                >
-                  Yumita Namirah
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    color: "var(--hero-text-muted)",
-                    fontWeight: 500,
-                  }}
-                >
-                  @namirah.yumita
-                </div>
+                @namirah.yumita
               </div>
             </div>
 
@@ -568,7 +552,7 @@ export default function Hero() {
           }
           .hero-grid > div:last-child {
             order: -1;
-            max-width: 220px;
+            max-width: 260px;
             margin: 0 auto;
           }
           .hero-floating-card { display: none !important; }
