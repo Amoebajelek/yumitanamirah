@@ -160,7 +160,9 @@ export default function Hero() {
                     fontWeight: 500,
                   }}
                 >
-                  {locale === "id" ? "Sangat direkomendasikan" : "Highly recommended"}
+                  {locale === "id"
+                    ? "Sangat direkomendasikan"
+                    : "Highly recommended"}
                 </span>
               </div>
             </div>
@@ -188,7 +190,7 @@ export default function Hero() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                50+
+                30+
               </div>
               <div
                 style={{
@@ -332,7 +334,7 @@ export default function Hero() {
             style={{
               position: "absolute",
               width: "85%",
-              height: "85%",
+              height: "125%",
               borderRadius: "50%",
               background:
                 "radial-gradient(circle, rgba(255, 92, 53, 0.25) 0%, rgba(255, 92, 53, 0.05) 60%, transparent 80%)",
@@ -344,9 +346,9 @@ export default function Hero() {
           {/* Photo container */}
           <div
             style={{
-              width: "100%",
-              maxWidth: "420px",
-              aspectRatio: "1/1",
+              width: "180%",
+              maxWidth: "500px",
+              aspectRatio: "3/4",
               borderRadius: "32px",
               overflow: "hidden",
               position: "relative",
