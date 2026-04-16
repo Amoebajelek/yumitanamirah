@@ -134,8 +134,8 @@ export default function Hero() {
                 }}
               >
                 {locale === "id"
-                  ? "Social Media Content Creator dengan pengalaman menangani 50+ brand dan total 7M+ views. Mengubah cerita menjadi konten yang membuat orang berhenti scroll."
-                  : "Social Media Content Creator with 50+ brands served and 7M+ total views. Turning stories into scroll-stopping content."}
+                  ? "Social Media Content Creator dengan pengalaman menangani 30+ brand dan total 15M+ views. Mengubah cerita menjadi konten yang membuat orang berhenti scroll."
+                  : "Social Media Content Creator with 30+ brands served and 15M+ total views. Turning stories into scroll-stopping content."}
               </p>
               <div
                 style={{ display: "flex", gap: "16px", alignItems: "center" }}
