@@ -14,11 +14,23 @@ import {
   tvPortfolio,
 } from "@/data/portfolio";
 
-type Tab = "2026" | "2025" | "2024" | "tiktok2023" | "tiktok2022" | "travel" | "foodies" | "branding" | "tv";
+type Tab =
+  | "2026"
+  | "2025"
+  | "2024"
+  | "tiktok2023"
+  | "tiktok2022"
+  | "travel"
+  | "foodies"
+  | "branding"
+  | "tv";
 
 type Platform = "instagram" | "tiktok" | "mixed";
 
-const tabGroups: { label: string; tabs: { id: Tab; label: string; platform: Platform }[] }[] = [
+const tabGroups: {
+  label: string;
+  tabs: { id: Tab; label: string; platform: Platform }[];
+}[] = [
   {
     label: "Brand Work",
     tabs: [
@@ -40,7 +52,7 @@ const tabGroups: { label: string; tabs: { id: Tab; label: string; platform: Plat
   },
 ];
 
-const allTabs = tabGroups.flatMap(g => g.tabs);
+const allTabs = tabGroups.flatMap((g) => g.tabs);
 
 const dataMap: Record<Tab, string[]> = {
   "2026": portfolioLinks2026,
@@ -80,15 +92,17 @@ function InstagramEmbed({ url }: { url: string }) {
   if (!shortcode) return null;
 
   return (
-    <div style={{
-      position: "relative",
-      aspectRatio: "9/16",
-      borderRadius: "20px",
-      overflow: "hidden",
-      background: "var(--bg-card2)",
-      border: "1px solid var(--border)",
-      boxShadow: "var(--shadow-card)",
-    }}>
+    <div
+      style={{
+        position: "relative",
+        aspectRatio: "9/16",
+        borderRadius: "20px",
+        overflow: "hidden",
+        background: "var(--bg-card2)",
+        border: "1px solid var(--border)",
+        boxShadow: "var(--shadow-card)",
+      }}
+    >
       <iframe
         src={`https://www.instagram.com/reel/${shortcode}/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fwww.example.com`}
         style={{
@@ -113,15 +127,17 @@ function TikTokEmbed({ url }: { url: string }) {
   if (!videoId) return null;
 
   return (
-    <div style={{
-      position: "relative",
-      aspectRatio: "9/16",
-      borderRadius: "20px",
-      overflow: "hidden",
-      background: "var(--bg-card2)",
-      border: "1px solid var(--border)",
-      boxShadow: "var(--shadow-card)",
-    }}>
+    <div
+      style={{
+        position: "relative",
+        aspectRatio: "9/16",
+        borderRadius: "20px",
+        overflow: "hidden",
+        background: "var(--bg-card2)",
+        border: "1px solid var(--border)",
+        boxShadow: "var(--shadow-card)",
+      }}
+    >
       <iframe
         src={`https://www.tiktok.com/player/v1/${videoId}?music_info=1&description=1`}
         style={{
@@ -147,22 +163,28 @@ export default function Portfolio() {
   const [visibleCount, setVisibleCount] = useState(defaultCount);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.05 });
 
-  const currentTab = allTabs.find(t => t.id === activeTab);
+  const currentTab = allTabs.find((t) => t.id === activeTab);
   const currentPlatform = currentTab?.platform ?? "instagram";
   const links = dataMap[activeTab];
   const visibleLinks = links.slice(0, visibleCount);
   const hasMore = visibleCount < links.length;
 
-  const handleTabChange = useCallback((tab: Tab) => {
-    setActiveTab(tab);
-    setVisibleCount(isMobile ? 4 : 12);
-  }, [isMobile]);
+  const handleTabChange = useCallback(
+    (tab: Tab) => {
+      setActiveTab(tab);
+      setVisibleCount(isMobile ? 4 : 12);
+    },
+    [isMobile],
+  );
 
   return (
-    <section id="portfolio" style={{
-      padding: "80px 20px",
-      background: "var(--bg-alt)",
-    }}>
+    <section
+      id="portfolio"
+      style={{
+        padding: "80px 20px",
+        background: "var(--bg-alt)",
+      }}
+    >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }} ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -170,50 +192,86 @@ export default function Portfolio() {
           transition={{ duration: 0.6 }}
           style={{ marginBottom: "32px" }}
         >
-          <span className="badge" style={{ marginBottom: "16px" }}>Work</span>
-          <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "8px" }}>
+          <span className="badge" style={{ marginBottom: "16px" }}>
+            Work
+          </span>
+          <h2
+            style={{
+              fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+              marginBottom: "8px",
+            }}
+          >
             Content <span style={{ color: "var(--primary)" }}>Portfolio</span>
           </h2>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", fontWeight: 400 }}>
-            {links.length} karya tersedia di tab ini
+          <p
+            style={{
+              color: "var(--text-muted)",
+              fontSize: "0.9rem",
+              fontWeight: 400,
+            }}
+          >
+            {links.length} works available in this tab.
           </p>
         </motion.div>
 
         {/* Tabs */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            marginBottom: "32px",
+          }}
+        >
           {tabGroups.map((group) => (
-            <div key={group.label} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{
-                fontSize: "0.68rem",
-                fontWeight: 700,
-                color: "var(--text-muted)",
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-                whiteSpace: "nowrap",
-                flexShrink: 0,
-              }}>
+            <div
+              key={group.label}
+              style={{ display: "flex", alignItems: "center", gap: "10px" }}
+            >
+              <span
+                style={{
+                  fontSize: "0.68rem",
+                  fontWeight: 700,
+                  color: "var(--text-muted)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                }}
+              >
                 {group.label}
               </span>
-              <div className="portfolio-tabs" style={{
-                display: "flex",
-                gap: "4px",
-                background: "var(--pill-bg)",
-                padding: "4px",
-                borderRadius: "14px",
-                overflowX: "auto",
-                WebkitOverflowScrolling: "touch",
-                flexShrink: 1,
-                minWidth: 0,
-              }}>
+              <div
+                className="portfolio-tabs"
+                style={{
+                  display: "flex",
+                  gap: "4px",
+                  background: "var(--pill-bg)",
+                  padding: "4px",
+                  borderRadius: "14px",
+                  overflowX: "auto",
+                  WebkitOverflowScrolling: "touch",
+                  flexShrink: 1,
+                  minWidth: 0,
+                }}
+              >
                 {group.tabs.map((tab) => (
                   <button
                     key={tab.id}
                     onClick={() => handleTabChange(tab.id)}
                     style={{
                       padding: "8px 14px",
-                      background: activeTab === tab.id ? "var(--pill-active-bg)" : "transparent",
+                      background:
+                        activeTab === tab.id
+                          ? "var(--pill-active-bg)"
+                          : "transparent",
                       border: "none",
-                      color: activeTab === tab.id ? "var(--pill-active-text)" : "var(--text-muted)",
+                      color:
+                        activeTab === tab.id
+                          ? "var(--pill-active-text)"
+                          : "var(--text-muted)",
                       fontSize: "0.75rem",
                       cursor: "pointer",
                       transition: "all 0.2s ease",
@@ -227,13 +285,18 @@ export default function Portfolio() {
                     }}
                   >
                     {tab.label}
-                    <span style={{
-                      fontSize: "0.6rem",
-                      opacity: 0.7,
-                      background: activeTab === tab.id ? "rgba(255,255,255,0.15)" : "var(--border)",
-                      padding: "2px 6px",
-                      borderRadius: "100px",
-                    }}>
+                    <span
+                      style={{
+                        fontSize: "0.6rem",
+                        opacity: 0.7,
+                        background:
+                          activeTab === tab.id
+                            ? "rgba(255,255,255,0.15)"
+                            : "var(--border)",
+                        padding: "2px 6px",
+                        borderRadius: "100px",
+                      }}
+                    >
                       {dataMap[tab.id].length}
                     </span>
                   </button>
@@ -244,11 +307,14 @@ export default function Portfolio() {
         </div>
 
         {/* Grid */}
-        <div className="portfolio-grid" style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: "16px",
-        }}>
+        <div
+          className="portfolio-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gap: "16px",
+          }}
+        >
           {visibleLinks.map((url, i) => (
             <motion.div
               key={`${activeTab}-${url}`}
@@ -256,7 +322,11 @@ export default function Portfolio() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: Math.min(i * 0.04, 0.5) }}
             >
-              {(currentPlatform === "mixed" ? (url.includes("tiktok.com") ? "tiktok" : "instagram") : currentPlatform) === "instagram" ? (
+              {(currentPlatform === "mixed"
+                ? url.includes("tiktok.com")
+                  ? "tiktok"
+                  : "instagram"
+                : currentPlatform) === "instagram" ? (
                 <InstagramEmbed url={url} />
               ) : (
                 <TikTokEmbed url={url} />
@@ -285,7 +355,8 @@ export default function Portfolio() {
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "var(--primary-dark)";
                 e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 58, 0.3)";
+                e.currentTarget.style.boxShadow =
+                  "0 8px 24px rgba(232, 80, 58, 0.3)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "var(--primary)";
@@ -329,17 +400,19 @@ export default function Portfolio() {
           </div>
         )}
 
-        <p style={{
-          marginTop: "24px",
-          fontSize: "0.82rem",
-          color: "var(--text-muted)",
-          textAlign: "center",
-        }}>
+        <p
+          style={{
+            marginTop: "24px",
+            fontSize: "0.82rem",
+            color: "var(--text-muted)",
+            textAlign: "center",
+          }}
+        >
           {currentPlatform === "mixed"
-            ? "Konten memuat langsung dari Instagram & TikTok."
+            ? "Content is pulled directly from Instagram & TikTok."
             : currentPlatform === "instagram"
-            ? "Konten memuat langsung dari Instagram."
-            : "Konten memuat langsung dari TikTok."}
+              ? "Content is pulled directly from Instagram."
+              : "Content is pulled directly from TikTok"}
         </p>
       </div>
 
