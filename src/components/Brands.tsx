@@ -93,7 +93,7 @@ export default function Brands({ logos }: BrandsProps) {
                 marginBottom: "4px",
               }}
             >
-              {locale === "id" ? "Total Logo" : "Total Logos"}
+              {locale === "id" ? "Total Brand" : "Total Brands"}
             </div>
             <div
               style={{
