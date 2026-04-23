@@ -161,6 +161,7 @@ export default function Brands({ logos }: BrandsProps) {
                       alt=""
                       fill
                       sizes="172px"
+                      className="brands-logo-image"
                       style={{
                         objectFit: "contain",
                         padding: "14px 20px",
@@ -230,8 +231,8 @@ export default function Brands({ logos }: BrandsProps) {
           box-shadow: var(--shadow-card-hover);
         }
 
-        .brands-marquee-card:hover img {
-          filter: grayscale(0%) contrast(1);
+        .brands-marquee-card:hover .brands-logo-image {
+          filter: none !important;
         }
 
         @keyframes brands-scroll-left {
