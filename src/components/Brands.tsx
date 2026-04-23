@@ -216,7 +216,7 @@ export default function Brands({ logos }: BrandsProps) {
           animation-duration: 240s;
         }
 
-        .brands-marquee-shell:hover .brands-marquee-track {
+        .brands-marquee-shell:has(.brands-marquee-card:hover) .brands-marquee-track {
           animation-play-state: paused;
         }
 
