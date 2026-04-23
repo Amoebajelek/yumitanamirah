@@ -18,6 +18,10 @@ export default function Navbar() {
       href: "#experience",
     },
     {
+      label: locale === "id" ? "Brand" : "Brands",
+      href: "#brands",
+    },
+    {
       label: locale === "id" ? "Portofolio" : "Portfolio",
       href: "#portfolio",
     },
