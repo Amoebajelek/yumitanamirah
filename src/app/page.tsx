@@ -21,9 +21,9 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
-      <Brands logos={brandLogos} />
       <About />
       <Experience />
+      <Brands logos={brandLogos} />
       <Portfolio />
       <Skills />
       <Achievements />

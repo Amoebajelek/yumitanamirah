@@ -12,22 +12,19 @@ type BrandsProps = {
 export default function Brands({ logos }: BrandsProps) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.08 });
   const { locale } = useLanguage();
-  const marqueeLogos = [...logos, ...logos, ...logos];
+  const marqueeLogos = [...logos, ...logos];
 
   return (
     <section
       id="brands"
       ref={ref}
       style={{
-        minHeight: "100vh",
-        padding: "96px 20px 72px",
+        padding: "56px 20px",
         background:
-          "radial-gradient(circle at top, color-mix(in srgb, var(--primary) 14%, transparent) 0%, transparent 32%), linear-gradient(180deg, color-mix(in srgb, var(--bg) 30%, var(--hero-bg) 70%) 0%, color-mix(in srgb, var(--bg) 72%, var(--hero-bg) 28%) 100%)",
-        display: "flex",
-        alignItems: "center",
+          "linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg-alt) 76%, transparent) 100%)",
       }}
     >
-      <div style={{ maxWidth: "1280px", margin: "0 auto", width: "100%" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -36,9 +33,9 @@ export default function Brands({ logos }: BrandsProps) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            gap: "24px",
+            gap: "20px",
             flexWrap: "wrap",
-            marginBottom: "32px",
+            marginBottom: "24px",
           }}
         >
           <div style={{ maxWidth: "700px" }}>
@@ -52,7 +49,6 @@ export default function Brands({ logos }: BrandsProps) {
                 letterSpacing: "-0.02em",
                 lineHeight: 1.15,
                 marginBottom: "10px",
-                color: "var(--hero-text)",
               }}
             >
               {locale === "id" ? "Brand yang Pernah" : "Brands I Have"}{" "}
@@ -62,8 +58,8 @@ export default function Brands({ logos }: BrandsProps) {
             </h2>
             <p
               style={{
-                color: "var(--hero-text-secondary)",
-                fontSize: "0.95rem",
+                color: "var(--text-secondary)",
+                fontSize: "0.9rem",
                 lineHeight: 1.6,
               }}
             >
@@ -79,9 +75,8 @@ export default function Brands({ logos }: BrandsProps) {
               border: "1px solid var(--border)",
               borderRadius: "18px",
               padding: "14px 18px",
-              background: "color-mix(in srgb, var(--bg-card) 88%, transparent)",
+              background: "var(--bg-card)",
               boxShadow: "var(--shadow-card)",
-              backdropFilter: "blur(14px)",
             }}
           >
             <div
@@ -101,7 +96,6 @@ export default function Brands({ logos }: BrandsProps) {
                 fontSize: "1.7rem",
                 fontWeight: 800,
                 lineHeight: 1,
-                color: "var(--hero-text)",
               }}
             >
               {logos.length}
@@ -117,12 +111,12 @@ export default function Brands({ logos }: BrandsProps) {
           style={{
             position: "relative",
             overflow: "hidden",
-            borderRadius: "32px",
-            border: "1px solid var(--hero-border)",
+            borderRadius: "26px",
+            border: "1px solid var(--border)",
             background:
-              "linear-gradient(135deg, color-mix(in srgb, var(--hero-bg-alt) 82%, var(--primary) 18%), color-mix(in srgb, var(--hero-bg) 74%, var(--bg-card) 26%))",
+              "linear-gradient(135deg, color-mix(in srgb, var(--bg-card) 88%, var(--primary) 12%), var(--bg-card))",
             boxShadow: "var(--shadow-card)",
-            padding: "26px 0",
+            padding: "18px 0",
           }}
         >
           <div className="brands-marquee-track">
@@ -132,30 +126,27 @@ export default function Brands({ logos }: BrandsProps) {
                 className="brands-marquee-card"
                 style={{
                   position: "relative",
-                  flex: "0 0 220px",
-                  height: "96px",
-                  borderRadius: "22px",
-                  border: "1px solid var(--hero-border)",
-                  background:
-                    "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))",
+                  flex: "0 0 172px",
+                  height: "74px",
+                  borderRadius: "18px",
+                  border: "1px solid var(--border)",
+                  background: "color-mix(in srgb, var(--bg-card) 94%, white 6%)",
                   boxShadow: "var(--shadow-card)",
                   overflow: "hidden",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backdropFilter: "blur(8px)",
                 }}
               >
                 <Image
                   src={logo}
                   alt=""
                   fill
-                  sizes="220px"
+                  sizes="172px"
                   style={{
                     objectFit: "contain",
-                    padding: "18px 24px",
-                    filter: "grayscale(100%) contrast(1.05) brightness(1.08)",
-                    transition: "filter 0.25s ease",
+                    padding: "14px 20px",
+                    filter: "grayscale(100%) contrast(1.05)",
                   }}
                 />
               </div>
@@ -178,30 +169,26 @@ export default function Brands({ logos }: BrandsProps) {
 
         .brands-marquee-shell::before {
           left: 0;
-          background: linear-gradient(90deg, color-mix(in srgb, var(--hero-bg) 92%, transparent) 0%, transparent 100%);
+          background: linear-gradient(90deg, var(--bg) 0%, transparent 100%);
         }
 
         .brands-marquee-shell::after {
           right: 0;
-          background: linear-gradient(270deg, color-mix(in srgb, var(--hero-bg) 92%, transparent) 0%, transparent 100%);
+          background: linear-gradient(270deg, var(--bg) 0%, transparent 100%);
         }
 
         .brands-marquee-track {
           display: flex;
           align-items: center;
-          gap: 18px;
+          gap: 14px;
           width: max-content;
-          animation: brands-scroll 170s linear infinite;
+          animation: brands-scroll 140s linear infinite;
           will-change: transform;
-          padding: 0 18px;
+          padding: 0 14px;
         }
 
         .brands-marquee-card {
           transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .brands-marquee-shell:hover .brands-marquee-track {
-          animation-play-state: paused;
         }
 
         .brands-marquee-card:hover {
@@ -210,9 +197,8 @@ export default function Brands({ logos }: BrandsProps) {
           box-shadow: var(--shadow-card-hover);
         }
 
-        .brands-marquee-shell:hover .brands-marquee-card img,
         .brands-marquee-card:hover img {
-          filter: none;
+          filter: grayscale(0%) contrast(1);
         }
 
         @keyframes brands-scroll {
@@ -227,7 +213,7 @@ export default function Brands({ logos }: BrandsProps) {
 
         @media (max-width: 767px) {
           .brands-marquee-shell {
-            padding: 18px 0 !important;
+            padding: 14px 0 !important;
           }
 
           .brands-marquee-shell::before,
@@ -236,14 +222,14 @@ export default function Brands({ logos }: BrandsProps) {
           }
 
           .brands-marquee-track {
-            animation-duration: 125s;
+            animation-duration: 110s;
             gap: 10px;
             padding: 0 10px;
           }
 
           .brands-marquee-card {
-            flex-basis: 156px !important;
-            height: 74px !important;
+            flex-basis: 136px !important;
+            height: 64px !important;
           }
         }
       `}</style>
