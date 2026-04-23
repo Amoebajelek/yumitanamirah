@@ -68,7 +68,9 @@ const dataMap: Record<Tab, string[]> = {
 };
 
 function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 768 : false,
+  );
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -158,7 +160,7 @@ function TikTokEmbed({ url }: { url: string }) {
 
 export default function Portfolio() {
   const isMobile = useIsMobile();
-  const defaultCount = isMobile ? 4 : 12;
+  const defaultCount = isMobile ? 3 : 6;
   const { locale } = useLanguage();
 
   const [activeTab, setActiveTab] = useState<Tab>("2026");
@@ -219,9 +221,9 @@ export default function Portfolio() {
   const handleTabChange = useCallback(
     (tab: Tab) => {
       setActiveTab(tab);
-      setVisibleCount(isMobile ? 4 : 12);
+      setVisibleCount(defaultCount);
     },
-    [isMobile],
+    [defaultCount],
   );
 
   return (

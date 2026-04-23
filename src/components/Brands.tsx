@@ -143,8 +143,8 @@ export default function Brands({ logos }: BrandsProps) {
                     className="brands-marquee-card"
                     style={{
                       position: "relative",
-                      flex: "0 0 172px",
-                      height: "74px",
+                      flex: "0 0 208px",
+                      height: "92px",
                       borderRadius: "18px",
                       border: "1px solid var(--border)",
                       background:
@@ -160,11 +160,11 @@ export default function Brands({ logos }: BrandsProps) {
                       src={logo}
                       alt=""
                       fill
-                      sizes="172px"
+                      sizes="208px"
                       className="brands-logo-image"
                       style={{
                         objectFit: "contain",
-                        padding: "14px 20px",
+                        padding: "16px 22px",
                         filter: "grayscale(100%) contrast(1.05)",
                       }}
                     />
@@ -281,8 +281,8 @@ export default function Brands({ logos }: BrandsProps) {
           }
 
           .brands-marquee-card {
-            flex-basis: 136px !important;
-            height: 64px !important;
+            flex-basis: 156px !important;
+            height: 76px !important;
           }
         }
       `}</style>
