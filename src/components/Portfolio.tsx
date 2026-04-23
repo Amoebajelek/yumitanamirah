@@ -160,7 +160,7 @@ function TikTokEmbed({ url }: { url: string }) {
 
 export default function Portfolio() {
   const isMobile = useIsMobile();
-  const defaultCount = isMobile ? 3 : 6;
+  const defaultCount = isMobile ? 3 : 7;
   const { locale } = useLanguage();
 
   const [activeTab, setActiveTab] = useState<Tab>("2026");
