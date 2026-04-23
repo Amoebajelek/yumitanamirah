@@ -1,30 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { achievements } from "@/data/portfolio";
 import { useLanguage } from "./LanguageProvider";
 
 const years = ["2025", "2024", "2023", "2022", "2021", "2020", "2017"];
-
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-  return isMobile;
-}
+const INITIAL_VISIBLE_COUNT = 6;
 
 export default function Achievements() {
-  const isMobile = useIsMobile();
-  const defaultCount = isMobile ? 5 : achievements.length;
   const { locale } = useLanguage();
 
   const [activeYear, setActiveYear] = useState<string>("all");
-  const [visibleCount, setVisibleCount] = useState(defaultCount);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.05 });
 
   const filtered = activeYear === "all"
@@ -36,7 +24,7 @@ export default function Achievements() {
 
   const handleYearChange = (y: string) => {
     setActiveYear(y);
-    setVisibleCount(isMobile ? 5 : achievements.length);
+    setVisibleCount(INITIAL_VISIBLE_COUNT);
   };
 
   return (
@@ -241,10 +229,12 @@ export default function Achievements() {
         )}
 
         {/* Collapse */}
-        {!hasMore && visibleCount > defaultCount && filtered.length > defaultCount && (
+        {!hasMore &&
+          visibleCount > INITIAL_VISIBLE_COUNT &&
+          filtered.length > INITIAL_VISIBLE_COUNT && (
           <div style={{ textAlign: "center", marginTop: "32px" }}>
             <button
-              onClick={() => setVisibleCount(defaultCount)}
+              onClick={() => setVisibleCount(INITIAL_VISIBLE_COUNT)}
               style={{
                 padding: "12px 32px",
                 background: "transparent",
