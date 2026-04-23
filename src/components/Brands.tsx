@@ -12,7 +12,11 @@ type BrandsProps = {
 export default function Brands({ logos }: BrandsProps) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.08 });
   const { locale } = useLanguage();
-  const marqueeLogos = [...logos, ...logos];
+  const rows = [
+    logos.filter((_, index) => index % 3 === 0),
+    logos.filter((_, index) => index % 3 === 1),
+    logos.filter((_, index) => index % 3 === 2),
+  ].map((row) => [...row, ...row]);
 
   return (
     <section
@@ -117,41 +121,57 @@ export default function Brands({ logos }: BrandsProps) {
               "linear-gradient(135deg, color-mix(in srgb, var(--bg-card) 88%, var(--primary) 12%), var(--bg-card))",
             boxShadow: "var(--shadow-card)",
             padding: "18px 0",
+            display: "grid",
+            gap: "14px",
           }}
         >
-          <div className="brands-marquee-track">
-            {marqueeLogos.map((logo, index) => (
-              <div
-                key={`${logo}-${index}`}
-                className="brands-marquee-card"
-                style={{
-                  position: "relative",
-                  flex: "0 0 172px",
-                  height: "74px",
-                  borderRadius: "18px",
-                  border: "1px solid var(--border)",
-                  background: "color-mix(in srgb, var(--bg-card) 94%, white 6%)",
-                  boxShadow: "var(--shadow-card)",
-                  overflow: "hidden",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  src={logo}
-                  alt=""
-                  fill
-                  sizes="172px"
-                  style={{
-                    objectFit: "contain",
-                    padding: "14px 20px",
-                    filter: "grayscale(100%) contrast(1.05)",
-                  }}
-                />
+          {rows.map((row, rowIndex) => (
+            <div
+              key={`row-${rowIndex}`}
+              className={`brands-marquee-lane ${
+                rowIndex % 2 === 0 ? "is-left" : "is-right"
+              }`}
+              style={{
+                paddingLeft: rowIndex === 1 ? "54px" : "0",
+                paddingRight: rowIndex !== 1 ? "28px" : "0",
+              }}
+            >
+              <div className="brands-marquee-track">
+                {row.map((logo, index) => (
+                  <div
+                    key={`${rowIndex}-${logo}-${index}`}
+                    className="brands-marquee-card"
+                    style={{
+                      position: "relative",
+                      flex: "0 0 172px",
+                      height: "74px",
+                      borderRadius: "18px",
+                      border: "1px solid var(--border)",
+                      background:
+                        "color-mix(in srgb, var(--bg-card) 94%, white 6%)",
+                      boxShadow: "var(--shadow-card)",
+                      overflow: "hidden",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Image
+                      src={logo}
+                      alt=""
+                      fill
+                      sizes="172px"
+                      style={{
+                        objectFit: "contain",
+                        padding: "14px 20px",
+                        filter: "grayscale(100%) contrast(1.05)",
+                      }}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </motion.div>
       </div>
 
@@ -177,14 +197,27 @@ export default function Brands({ logos }: BrandsProps) {
           background: linear-gradient(270deg, var(--bg) 0%, transparent 100%);
         }
 
+        .brands-marquee-lane {
+          overflow: hidden;
+        }
+
         .brands-marquee-track {
           display: flex;
           align-items: center;
           gap: 14px;
           width: max-content;
-          animation: brands-scroll 140s linear infinite;
+          animation: brands-scroll-left 220s linear infinite;
           will-change: transform;
           padding: 0 14px;
+        }
+
+        .brands-marquee-lane.is-right .brands-marquee-track {
+          animation-name: brands-scroll-right;
+          animation-duration: 240s;
+        }
+
+        .brands-marquee-shell:hover .brands-marquee-track {
+          animation-play-state: paused;
         }
 
         .brands-marquee-card {
@@ -201,13 +234,23 @@ export default function Brands({ logos }: BrandsProps) {
           filter: grayscale(0%) contrast(1);
         }
 
-        @keyframes brands-scroll {
+        @keyframes brands-scroll-left {
           from {
             transform: translateX(0);
           }
 
           to {
             transform: translateX(calc(-50% - 7px));
+          }
+        }
+
+        @keyframes brands-scroll-right {
+          from {
+            transform: translateX(calc(-50% - 7px));
+          }
+
+          to {
+            transform: translateX(0);
           }
         }
 
@@ -221,10 +264,19 @@ export default function Brands({ logos }: BrandsProps) {
             width: 42px;
           }
 
+          .brands-marquee-lane {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+          }
+
           .brands-marquee-track {
-            animation-duration: 110s;
+            animation-duration: 180s;
             gap: 10px;
             padding: 0 10px;
+          }
+
+          .brands-marquee-lane.is-right .brands-marquee-track {
+            animation-duration: 200s;
           }
 
           .brands-marquee-card {
